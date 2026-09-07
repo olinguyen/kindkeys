@@ -29,6 +29,20 @@ npm run preview    # serve the built bundle
 React 18 + TypeScript on Vite. No backend — the only thing that persists is how
 many times you've typed each passage, kept in `localStorage`.
 
+## Deploying
+
+Pushing to `main` builds the site and publishes it to GitHub Pages via
+`.github/workflows/deploy.yml`.
+
+**Pages must be set to build from a workflow:** Settings → Pages → Source →
+*GitHub Actions*. Pointing Pages at a branch instead publishes this repo's
+source, where `index.html` still references the dev entry `/src/main.tsx` that
+only Vite can resolve — the page loads blank.
+
+The build uses a relative `base`, so asset URLs resolve against whatever path
+the page is served from. That covers the project path this is published at
+(`/kindkeys/`) and a domain root equally, with nothing to keep in sync.
+
 ## How it fits together
 
 ```

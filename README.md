@@ -89,6 +89,9 @@ npm run check:passages
 ```
 
 prints every passage with its length and typing time, then reports problems.
+It runs on every pull request (`ci.yml`) and again before publishing
+(`deploy.yml`), so a bad entry is caught on the PR rather than after merge.
+
 **Errors fail CI** — an entry that is neither a credited excerpt nor marked
 original, an excerpt missing its work, a tag outside the vocabulary in
 `types.ts`, text outside 60–250 characters, or a duplicate. **Warnings don't

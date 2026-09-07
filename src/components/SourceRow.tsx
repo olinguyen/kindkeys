@@ -16,7 +16,7 @@ export function SourceRow({ passage, th, isDaily, compact, action }: Props) {
     ? 'Your own words'
     : passage.original
       ? 'Original writing, inspired by'
-      : `${passage.author}, ${passage.work}`;
+      : `${passage.author}, ${passage.work}${passage.translator ? ` · tr. ${passage.translator}` : ''}`;
 
   return (
     <div

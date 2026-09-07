@@ -48,7 +48,9 @@ the page is served from. That covers the project path this is published at
 ```
 src/
   App.tsx                    state, focus and the two layouts (desktop / phone)
-  data/categories.ts         the four categories: palettes, passages, sources
+  data/passages.json         the curated passages — the file to edit
+  data/types.ts              passage/category shapes and the tag vocabulary
+  data/categories.ts         the four categories: palettes and labels
   lib/typing.ts              one run of one passage → coloured words + stats
   lib/geometry.ts            deterministic shapes: stem curve, stone outlines, petals
   lib/fountain.ts            the bamboo fountain, animated per frame rather than per render
@@ -76,6 +78,44 @@ anything:
   Organic ramps.
 - **The whole run finishes on the last character**, even with a typo still
   standing, and the field blurs so a phone keyboard drops and the summary shows.
+
+## The passages
+
+The prose lives in `src/data/passages.json`, apart from the palettes, so
+reviewing it is reading passages rather than scrolling past colour values.
+
+```bash
+npm run check:passages
+```
+
+prints every passage with its length and typing time, then reports problems.
+It runs on every pull request (`ci.yml`) and again before publishing
+(`deploy.yml`), so a bad entry is caught on the PR rather than after merge.
+
+**Errors fail CI** — an entry that is neither a credited excerpt nor marked
+original, an excerpt missing its work, a tag outside the vocabulary in
+`types.ts`, text outside 60–250 characters, or a duplicate. **Warnings don't
+fail**; they are the standing to-do list.
+
+Each passage is one of two things, and the check enforces the difference:
+
+- **An excerpt** — `author` and `work`, plus `translator`. Modern translations
+  are under copyright; pre-1930 editions (Long, Carter, Higginson, Stewart) are
+  safe to quote and worth citing. Every excerpt currently warns because none has
+  its translation confirmed yet.
+- **Original writing** — `original: true` and a tradition tag, no author. It
+  renders as "Original writing, inspired by". Keep genuinely borrowed wording
+  out of these: a passage here previously opened with a line from *Tao Te Ching*
+  33 while claiming to be original, which is the mistake this check exists to
+  catch.
+
+To add a tag, add it to `TAGS` in `src/data/types.ts` — TypeScript derives the
+`Tag` union from that list and the checker reads it, so there is one place to
+edit.
+
+The day index picks each category's starting passage, so a small pool visibly
+repeats: with three passages, "Today's intention" comes round every third day.
+The checker warns below thirty.
 
 ## Layouts
 

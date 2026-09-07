@@ -1,57 +1,16 @@
+import { PASSAGES } from './passages';
+import type { Category } from './types';
+
+export type { CatId, CuratedCatId, Category, Passage, Tag, Theme } from './types';
+export { TAGS } from './types';
+
 /**
- * The four Kindkeys categories. Each carries its own palette, passage set and
- * illustration; the palette values are the ones tuned in design — the Kindness
- * and Presence grounds are hue-matched to their accents, Perspective keeps the
+ * The four categories. Palettes are the ones tuned in design — the Kindness and
+ * Presence grounds are hue-matched to their accents, Perspective keeps the
  * Organic surface, and "Your own" sits on a pale lavender.
+ *
+ * The prose lives in `passages.json`; this file is the look and the labels.
  */
-
-export type CatId = 'kind' | 'pres' | 'persp' | 'custom';
-
-export interface Theme {
-  /** Page ground. */
-  bg: string;
-  /** The category's voice — pills, ring, caret, illustration highlights. */
-  accent: string;
-  /** Mid step, used for the ring track and washed illustration fills. */
-  mid: string;
-  /** Tinted surface for the summary card, pill housing and tags. */
-  soft: string;
-  /** Deep step — readable text on `soft` and on the ground. */
-  deep: string;
-  /** Characters not yet typed. */
-  todo: string;
-  /** A mistyped character. */
-  bad: string;
-  /** The highlight behind a mistyped character. */
-  badBg: string;
-  /** Three colours for the sparks a finished word releases. */
-  sparks: [string, string, string];
-}
-
-export interface Passage {
-  text: string;
-  author?: string;
-  work?: string;
-  /** Original, tradition-inspired writing rather than a sourced excerpt. */
-  original?: boolean;
-  /** Written by the reader in the "Your own" category. */
-  custom?: boolean;
-  tags: string[];
-}
-
-export interface Category {
-  id: CatId;
-  label: string;
-  purpose: string;
-  /** Headline in the summary card. */
-  doneLine: string;
-  /** Its second line, unless a repeat count replaces it. */
-  doneSub: string;
-  custom?: boolean;
-  th: Theme;
-  passages: Passage[];
-}
-
 export const CATS: Category[] = [
   {
     id: 'kind',
@@ -70,24 +29,7 @@ export const CATS: Category[] = [
       badBg: 'oklch(0.92 0.06 70)',
       sparks: ['var(--color-accent-2-400)', 'var(--color-accent-2-300)', 'var(--color-accent-300)'],
     },
-    passages: [
-      {
-        text: 'I am steady. I am allowed to take up space, and I trust the pace I am moving at today. I do not need to be finished to be worthy of rest. I can hold what is hard and still be gentle with myself.',
-        original: true,
-        tags: ['Self-compassion'],
-      },
-      {
-        text: 'Wherever there is a human being, there is an opportunity for a kindness.',
-        author: 'Seneca',
-        work: 'On the Happy Life',
-        tags: ['Stoicism'],
-      },
-      {
-        text: 'You can be patient with yourself the way you are patient with a friend who is learning. You are allowed to go slowly. You are allowed to begin again, and the beginning still counts.',
-        original: true,
-        tags: ['Self-compassion', 'Buddhism'],
-      },
-    ],
+    passages: PASSAGES.kind,
   },
   {
     id: 'pres',
@@ -106,24 +48,7 @@ export const CATS: Category[] = [
       badBg: 'oklch(0.94 0.045 70)',
       sparks: ['oklch(0.72 0.07 225)', 'oklch(0.85 0.05 225)', 'var(--color-accent-200)'],
     },
-    passages: [
-      {
-        text: 'Right now there is a breath moving through me. I notice the weight of my hands, the sound of the room, the light where it falls. Nothing needs solving in this moment. I am here, and here is enough.',
-        original: true,
-        tags: ['Mindfulness', 'Buddhism'],
-      },
-      {
-        text: 'Do not disturb yourself by picturing your life as a whole. Ask yourself about each present difficulty: what is there in this that cannot be borne? You will be ashamed to confess it.',
-        author: 'Marcus Aurelius',
-        work: 'Meditations, 8.36',
-        tags: ['Stoicism'],
-      },
-      {
-        text: 'The kettle, the cold floor, the first light on the wall. Ordinary things are not waiting to become something else. I can meet them as they are, one at a time, and let that be the whole task.',
-        original: true,
-        tags: ['Mindfulness', 'Daoism'],
-      },
-    ],
+    passages: PASSAGES.pres,
   },
   {
     id: 'persp',
@@ -142,24 +67,7 @@ export const CATS: Category[] = [
       badBg: 'oklch(0.94 0.045 70)',
       sparks: ['oklch(0.80 0.10 80)', 'oklch(0.88 0.07 82)', 'var(--color-neutral-400)'],
     },
-    passages: [
-      {
-        text: 'Some things are within our power, while others are not. Within our power are opinion, motivation, desire, aversion, and in a word, whatever is of our own doing; not within our power are our body, our property, reputation, office.',
-        author: 'Epictetus',
-        work: 'Enchiridion, 1',
-        tags: ['Stoicism'],
-      },
-      {
-        text: 'Most of what worries me will not matter in a year. I can hold my plans loosely and let the day change them. What is mine to do, I will do. What is not mine, I can set down.',
-        original: true,
-        tags: ['Stoicism'],
-      },
-      {
-        text: 'He who knows he has enough is rich. Water is soft and yields, yet nothing is better at wearing away what is hard. I can let go of the shape I planned and still arrive somewhere good.',
-        original: true,
-        tags: ['Daoism'],
-      },
-    ],
+    passages: PASSAGES.persp,
   },
   {
     id: 'custom',

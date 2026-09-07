@@ -94,15 +94,18 @@ It runs on every pull request (`ci.yml`) and again before publishing
 
 **Errors fail CI** — an entry that is neither a credited excerpt nor marked
 original, an excerpt missing its work, a tag outside the vocabulary in
-`types.ts`, text outside 60–250 characters, or a duplicate. **Warnings don't
+`types.ts`, a category key that isn't one of the three ids, a character a plain
+keyboard can't type (curly quotes, em dashes), text outside 60–250 characters,
+or a duplicate. **Warnings don't
 fail**; they are the standing to-do list.
 
 Each passage is one of two things, and the check enforces the difference:
 
 - **An excerpt** — `author` and `work`, plus `translator`. Modern translations
   are under copyright; pre-1930 editions (Long, Carter, Higginson, Stewart) are
-  safe to quote and worth citing. Every excerpt currently warns because none has
-  its translation confirmed yet.
+  safe to quote and worth citing. Seneca (Stewart, 1889) and Epictetus (Carter,
+  1758) are credited; the Marcus Aurelius passage still warns because its
+  wording matches no public-domain edition.
 - **Original writing** — `original: true` and a tradition tag, no author. It
   renders as "Original writing, inspired by". Keep genuinely borrowed wording
   out of these: a passage here previously opened with a line from *Tao Te Ching*

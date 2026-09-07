@@ -1,7 +1,7 @@
 {
   "kind": [
     {
-      "text": "I am steady. I am allowed to take up space, and I trust the pace I am moving at today. I do not need to be finished to be worthy of rest. I can hold what is hard and still be gentle with myself.",
+      "text": "I am steady. I am allowed to take up space, and I trust the pace I am moving at today. I do not need to be finished to be worthy of rest. When something is hard, I can slow down, ask for help, and speak to myself as I would to a friend.",
       "original": true,
       "tags": [
         "Self-compassion"
@@ -10,7 +10,8 @@
     {
       "text": "Wherever there is a human being, there is an opportunity for a kindness.",
       "author": "Seneca",
-      "work": "On the Happy Life",
+      "work": "On the Happy Life, 24",
+      "translator": "after Aubrey Stewart",
       "tags": [
         "Stoicism"
       ]
@@ -52,9 +53,10 @@
   ],
   "persp": [
     {
-      "text": "Some things are within our power, while others are not. Within our power are opinion, motivation, desire, aversion, and in a word, whatever is of our own doing; not within our power are our body, our property, reputation, office.",
+      "text": "Some things are in our control and others not. Things in our control are opinion, pursuit, desire, aversion, and, in a word, whatever are our own actions.",
       "author": "Epictetus",
       "work": "Enchiridion, 1",
+      "translator": "Elizabeth Carter",
       "tags": [
         "Stoicism"
       ]
@@ -67,7 +69,7 @@
       ]
     },
     {
-      "text": "Enough is a place I can choose to stand. Softness outlasts rigidity, and yielding is not the same as losing. I can set down the shape I planned for today and still arrive somewhere good.",
+      "text": "I do not have to force today into the shape I planned. When something will not bend, I can bend instead. I will do the task in front of me, stop when it is done, and let that be enough.",
       "original": true,
       "tags": [
         "Daoism"

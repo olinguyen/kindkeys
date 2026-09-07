@@ -29,10 +29,28 @@ if (!tagsBlock) {
 }
 const TAGS = [...tagsBlock[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
 
-// Bounds. MAX matches the cap on a custom passage and the size at which the
-// app drops the passage a font size; the target band is the 30–60s the app is
-// designed around, at an unhurried 40wpm.
-const MAX = 250;
+// The category ids live in types.ts too (`CuratedCatId`), derived from `CatId`.
+// A key that isn't one of them passes the `as Record<...>` cast in passages.ts
+// and then crashes the app on `cat.passages.length`, so check it here.
+const catIdBlock = typesSrc.match(/export type CatId = ([^;]+);/);
+if (!catIdBlock) {
+  console.error('check:passages — could not find `export type CatId = ...;` in src/data/types.ts');
+  process.exit(2);
+}
+const CAT_IDS = [...catIdBlock[1].matchAll(/'([^']+)'/g)].map((m) => m[1]).filter((id) => id !== 'custom');
+
+// The length cap is `MAX_CHARS` in categories.ts — the same number caps a
+// custom passage, so read it rather than keep a copy here.
+const maxBlock = read('src/data/categories.ts').match(/export const MAX_CHARS = (\d+);/);
+if (!maxBlock) {
+  console.error('check:passages — could not find `export const MAX_CHARS = <n>;` in src/data/categories.ts');
+  process.exit(2);
+}
+
+// Bounds. MAX is also the size at which the app drops the passage a font size;
+// the target band is the 30–60s the app is designed around, at an unhurried
+// 40wpm.
+const MAX = Number(maxBlock[1]);
 const MIN = 60;
 const TARGET_MIN = 100;
 const TARGET_MAX = 220;
@@ -45,6 +63,12 @@ const seen = new Map(); // text -> "cat #n"
 const openings = new Map(); // first 40 chars -> "cat #n"
 
 const secs = (chars) => (chars / 5 / WPM) * 60;
+
+// Category keys: exactly the curated ids, in any order.
+for (const id of CAT_IDS) if (!(id in PASSAGES)) errors.push(`${id}: category missing from passages.json`);
+for (const key of Object.keys(PASSAGES)) {
+  if (!CAT_IDS.includes(key)) errors.push(`${key}: not a category — expected one of ${CAT_IDS.join(', ')}`);
+}
 
 console.log(`\n${'category'.padEnd(11)} ${'#'.padEnd(2)} ${'chars'.padStart(5)} ${'~time'.padStart(6)}  ${'attribution'.padEnd(38)} tags`);
 console.log('-'.repeat(104));
@@ -81,6 +105,14 @@ for (const [cat, list] of Object.entries(PASSAGES)) {
     if (t && t.length < MIN) errors.push(`${at}: ${t.length} chars, under the ${MIN} floor`);
     if (t !== t.trim()) errors.push(`${at}: leading or trailing whitespace`);
     if (/\s{2,}/.test(t)) errors.push(`${at}: repeated whitespace`);
+    // The typing engine compares characters exactly, so anything a plain
+    // keyboard can't produce — curly quotes, em dashes, non-breaking spaces —
+    // is a typo the reader can never fix.
+    const odd = [...new Set(t.match(/[^\x20-\x7e]/g) ?? [])];
+    if (odd.length) {
+      const list = odd.map((c) => `"${c}" (U+${c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')})`).join(', ');
+      errors.push(`${at}: untypeable character${odd.length > 1 ? 's' : ''} ${list} — use plain ASCII punctuation`);
+    }
     if (t.length >= MIN && t.length <= MAX && (t.length < TARGET_MIN || t.length > TARGET_MAX)) {
       warnings.push(`${at}: ${t.length} chars ≈ ${secs(t.length).toFixed(0)}s, outside the 30–60s band`);
     }

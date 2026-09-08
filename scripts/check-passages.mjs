@@ -57,6 +57,9 @@ const TARGET_MAX = 220;
 const MIN_POOL = 30;
 const WPM = 40;
 
+// Authors who wrote in English, so an excerpt of theirs has no translator to credit.
+const ENGLISH = ['Henry David Thoreau', 'Ralph Waldo Emerson'];
+
 const errors = [];
 const warnings = [];
 const seen = new Map(); // text -> "cat #n"
@@ -95,7 +98,7 @@ for (const [cat, list] of Object.entries(PASSAGES)) {
     if (!isExcerpt && !isOriginal) errors.push(`${at}: neither an excerpt (author + work) nor marked original`);
     if (isExcerpt && !p.work) errors.push(`${at}: excerpt from ${p.author} is missing \`work\``);
     if (isOriginal && (p.work || p.translator)) errors.push(`${at}: original writing must not carry work/translator`);
-    if (isExcerpt && !p.translator) {
+    if (isExcerpt && !p.translator && !ENGLISH.includes(p.author)) {
       warnings.push(`${at}: ${p.author} — no \`translator\`; confirm the edition and that it is out of copyright`);
     }
 

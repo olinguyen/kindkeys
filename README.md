@@ -13,7 +13,8 @@ Four categories, each with its own palette and its own illustration:
 | **Perspective** | Balance, change, what is and isn't yours to control | Ten stones fall in slow motion and settle into a cairn |
 | **Your own** | Up to 250 characters you write yourself | A bamboo shishi-odoshi fills and pours into a stone basin |
 
-Excerpts carry their author and work (Seneca, Marcus Aurelius, Epictetus);
+Excerpts carry their author, work and translator (Seneca, Marcus Aurelius,
+Epictetus, Laozi, the Dhammapada, Thoreau);
 original tradition-inspired writing is labelled as such and tagged with the
 tradition it draws on.
 
@@ -103,14 +104,22 @@ Each passage is one of two things, and the check enforces the difference:
 
 - **An excerpt** — `author` and `work`, plus `translator`. Modern translations
   are under copyright; pre-1930 editions (Long, Carter, Higginson, Stewart) are
-  safe to quote and worth citing. Seneca (Stewart, 1889) and Epictetus (Carter,
-  1758) are credited; the Marcus Aurelius passage still warns because its
-  wording matches no public-domain edition.
+  safe to quote and worth citing. Current sources: Marcus Aurelius (Long,
+  1862), Epictetus (Carter, 1758), Seneca (Stewart, 1889; Gummere, 1917), the
+  Tao Te Ching (Legge, 1891), the Dhammapada (Muller, 1881) and Thoreau, who
+  wrote in English and so carries no translator.
 - **Original writing** — `original: true` and a tradition tag, no author. It
   renders as "Original writing, inspired by". Keep genuinely borrowed wording
   out of these: a passage here previously opened with a line from *Tao Te Ching*
   33 while claiming to be original, which is the mistake this check exists to
   catch.
+
+New passages come from the `grow-passages` workflow in `.claude/workflows/`,
+which sources excerpts from online public-domain editions and refetches each to
+confirm the wording, or writes originals and has an editor score them against
+the principles and the existing pool. Its result merges with
+`node scripts/merge-passages.mjs <result.json>`. Passages from two hosts the
+verifier could not reach were checked by hand against a second copy.
 
 To add a tag, add it to `TAGS` in `src/data/types.ts` — TypeScript derives the
 `Tag` union from that list and the checker reads it, so there is one place to

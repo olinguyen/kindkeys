@@ -97,8 +97,11 @@ It runs on every pull request (`ci.yml`) and again before publishing
 original, an excerpt missing its work, a tag outside the vocabulary in
 `types.ts`, a category key that isn't one of the three ids, a character a plain
 keyboard can't type (curly quotes, em dashes), text outside 60–250 characters,
-or a duplicate. **Warnings don't
-fail**; they are the standing to-do list.
+a gendered word ("he who", "a wise man", "her"), or a duplicate. **Warnings
+don't fail**; they are the standing to-do list. One warning to take seriously:
+a noun that ties the passage to one kind of day (laptop, inbox, kitchen, bill).
+A passage is read as anyone's daily affirmation, so it frames the idea, not the
+scene: productivity and giving yourself space, not closing the laptop at six.
 
 Each passage is one of two things, and the check enforces the difference:
 
@@ -107,7 +110,9 @@ Each passage is one of two things, and the check enforces the difference:
   safe to quote and worth citing. Current sources: Marcus Aurelius (Long,
   1862), Epictetus (Carter, 1758), Seneca (Stewart, 1889; Gummere, 1917), the
   Tao Te Ching (Legge, 1891), the Dhammapada (Muller, 1881) and Thoreau, who
-  wrote in English and so carries no translator.
+  wrote in English and so carries no translator. Classical translations
+  default to "he" and "a man"; only their impersonal or second-person
+  sentences are quoted.
 - **Original writing** — `original: true` and a tradition tag, no author. It
   renders as "Original writing, inspired by". Keep genuinely borrowed wording
   out of these: a passage here previously opened with a line from *Tao Te Ching*

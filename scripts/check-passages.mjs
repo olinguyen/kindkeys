@@ -3,7 +3,8 @@
  * Checks the curated passages and prints them as a review table.
  *
  * Errors fail the build — a passage that is mislabelled, over length, tagged
- * with a word that isn't in the vocabulary, or duplicated. Warnings don't fail;
+ * with a word that isn't in the vocabulary, duplicated, or written with
+ * gendered language. Warnings don't fail;
  * they're the standing to-do list (an excerpt whose translation isn't yet
  * credited, a category whose pool is small enough that the day rotation
  * visibly loops).
@@ -59,6 +60,13 @@ const WPM = 40;
 
 // Authors who wrote in English, so an excerpt of theirs has no translator to credit.
 const ENGLISH = ['Henry David Thoreau', 'Ralph Waldo Emerson'];
+
+// A passage is read as a daily affirmation by anyone, so it must not assume a
+// gender ("he who...", "a wise man") or describe one person's particular life
+// (a laptop, an inbox, a specific relative). Gendered words are an error; the
+// scene nouns are a warning, because "work" in "work done with care" is fine.
+const GENDERED = /\b(he|him|his|himself|she|her|hers|herself|man|men|woman|women|mankind|father|mother|dad|mum|mom|brother|sister|son|daughter|husband|wife|boy|girl|gentleman|gentlemen|lady|ladies)\b/i;
+const SCENIC = /\b(laptop|inbox|email|emails|phone|screen|desk|meeting|meetings|deadline|calendar|colleague|colleagues|boss|office|car|traffic|bus|kitchen|dishes|dishwasher|gym|pharmacy|salary|paycheck|payday|bill|bills|dollars)\b/i;
 
 const errors = [];
 const warnings = [];
@@ -116,6 +124,10 @@ for (const [cat, list] of Object.entries(PASSAGES)) {
       const list = odd.map((c) => `"${c}" (U+${c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')})`).join(', ');
       errors.push(`${at}: untypeable character${odd.length > 1 ? 's' : ''} ${list} — use plain ASCII punctuation`);
     }
+    const gendered = t.match(GENDERED);
+    if (gendered) errors.push(`${at}: gendered language ("${gendered[0]}") — passages must read as anyone's affirmation`);
+    const scenic = t.match(SCENIC);
+    if (scenic) warnings.push(`${at}: "${scenic[0]}" ties the passage to one kind of day — frame the idea instead of the scene`);
     if (t.length >= MIN && t.length <= MAX && (t.length < TARGET_MIN || t.length > TARGET_MAX)) {
       warnings.push(`${at}: ${t.length} chars ≈ ${secs(t.length).toFixed(0)}s, outside the 30–60s band`);
     }

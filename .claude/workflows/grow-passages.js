@@ -32,7 +32,9 @@ const PRINCIPLES = `HOUSE PRINCIPLES
 - No "woo-woo", vague, overly poetic or wishy-washy phrasing. No mystical or cliched tradition-speak (no "the universe", "energy", "flow", "surrender", "the sacred", "let go and trust", no water-and-rock metaphors).
 - End with a strong, practical thought the reader can act on today. Do NOT end with an abstract line about gentleness, softness, arriving, or holding difficult things.
 - Typing app: plain printable ASCII only (straight quotes, hyphens, no em dashes, curly quotes or ellipsis characters). One space between sentences.
-- Length 100-220 characters (about 30-60 seconds of unhurried typing). Hard cap 250.`
+- Length 100-220 characters (about 30-60 seconds of unhurried typing). Hard cap 250.
+- Universal: a passage is a daily affirmation anyone can read as their own. No gendered words (he, him, his, she, her, man, men, mother, father, partner, child). No specific scenes or props: no laptop, inbox, email, phone, meeting, deadline, colleague, car, kitchen, dishes, gym, bill, or a named relative. Frame the idea, not the day: "productivity and giving yourself space", not "closing the laptop at six".
+- Prioritise being clear, easy to understand, and useful to anyone. Good ground: not having to be productive, patience and kindness for yourself and others, gentleness, rest, presence, letting go of what you cannot control.`
 
 // Taste rules the first run applied by hand. Encoded so results merge without a manual pass.
 const EXCERPT_RULES = `EXCERPT RULES
@@ -40,6 +42,7 @@ const EXCERPT_RULES = `EXCERPT RULES
 - Copy the wording EXACTLY as printed at the url. Cut only at sentence boundaries. No ellipsis, no modernising, no silent fixes. The only permitted change is converting typographic quotes and dashes to plain ASCII.
 - Reject archaic grammar: no "thee", "thou", "thy", "thine", "ye", "hath", "-eth" verb endings. (Long's Marcus Aurelius is full of these; take only his impersonal sentences, or use Gerald Rendall's 1898 translation, which uses "you".)
 - Reject text containing parentheses, square brackets, or a quotation inside the quotation.
+- Reject gendered wording: "he who", "a man", "men", "him", "his", "a wise man", and so on. Many classical translations default to these; take only the sentences that address "you" or "we" or speak impersonally.
 - Reject anything mystical, abstract, preachy, or that a modern reader could not act on. Prefer plain practical advice over famous lines.
 - Length: 100-220 characters preferred; 60-100 only for a strong single sentence; hard cap 250.`
 
@@ -197,22 +200,25 @@ async function runExcerpts() {
 }
 
 // ---- originals ----------------------------------------------------------
+// Themes, not scenes. An earlier list of situations ("a workday: email,
+// meetings") produced passages about laptops and pharmacy queues, which read as
+// one person's life rather than an affirmation anyone can use.
 const ANGLES = [
-  'a workday: email, meetings, deadlines, colleagues',
-  'home and family: chores, children, partners, ageing parents',
-  'the body: tiredness, illness, exercise, food, sleep',
-  'money and possessions: bills, buying, wanting, enough',
-  'waiting and delays: queues, traffic, replies that have not come',
-  'arguments and criticism: being blamed, being wrong, disagreeing',
-  'evenings and weekends: rest, screens, boredom, unplanned time',
-  'starting something hard: procrastination, first steps, practice',
-  'other people: strangers, neighbours, service workers, small courtesies',
-  'endings: finishing, quitting, losing, saying no',
-  'comparison: other people\'s lives, social media, envy',
-  'the mind itself: rumination, worry loops, replaying conversations',
+  'not having to be productive: rest without earning it, worth apart from output',
+  'patience with yourself: slow progress, beginning again, being a beginner',
+  'patience and kindness toward others: assuming the ordinary explanation, not passing anger on',
+  'gentleness: staying calm when frustrated, the tone you use on yourself',
+  'presence: one thing at a time, the body as a place to return to',
+  'rest and enough: stopping at a fair hour, wanting less, naming what is enough',
+  'mistakes and criticism: taking the true part, letting a mistake be information',
+  'control and letting go: what is yours to do, other people\'s choices',
+  'worry and waiting: the future not yet here, rehearsals that change nothing',
+  'comparison: other people\'s progress taking nothing from yours',
+  'plans changing: bending instead of forcing, the smaller useful thing',
+  'attention: choosing where it goes, not needing an opinion on everything',
 ]
 
-const writePrompt = (c, angle, round, i) => `Write 8 original passages for "${c.label}", a category in a calm typing app people return to each morning. The category is about ${c.brief}. Situations for this batch: ${angle}.
+const writePrompt = (c, angle, round, i) => `Write 8 original passages for "${c.label}", a category in a calm typing app people return to each morning. The category is about ${c.brief}. Themes for this batch: ${angle}.
 
 ${PRINCIPLES}
 
@@ -227,7 +233,7 @@ const critiquePrompt = (c, list) => `You are a strict editor for a calm typing a
 
 ${PRINCIPLES}
 
-Reject for: vague or wishy-washy sentences, poetic abstraction, tradition cliches, an ending that is not a concrete practical thought, wording that echoes a famous quotation, any non-ASCII character, length outside 100-220, or being too close to another passage - in this batch OR in the existing list below - in idea, image, opening, or ending. Redundancy with the existing list is the main thing to catch now; the pool is growing and sameness is the risk. Where one small edit fixes the only weakness, supply the full revised text. Quote the offending words in note.
+Reject for: any gendered word, any specific scene or prop (a laptop, an inbox, a relative, a queue), vague or wishy-washy sentences, poetic abstraction, tradition cliches, an ending that is not a concrete practical thought, wording that echoes a famous quotation, any non-ASCII character, length outside 100-220, or being too close to another passage - in this batch OR in the existing list below - in idea, image, opening, or ending. Redundancy with the existing list is the main thing to catch now; the pool is growing and sameness is the risk. Where one small edit fixes the only weakness, supply the full revised text. Quote the offending words in note.
 
 Existing passages in this category:
 ${existingBlock(c.id)}

@@ -1,7 +1,7 @@
 {
   "kind": [
     {
-      "text": "I am steady. I am allowed to take up space, and I trust the pace I am moving at today. I do not need to be finished to be worthy of rest. When something is hard, I can slow down, ask for help, and speak to myself as I would to a friend.",
+      "text": "I am steady. I do not need to be finished to be worthy of rest. When something is hard, I can slow down, ask for help, and speak to myself as I would to a friend.",
       "original": true,
       "tags": [
         "Self-compassion"
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "text": "My worth is not measured by how much I get done today. A slow day is still a day I lived well. I will do what I can and let that be a full account.",
+      "text": "My worth is not measured by how much I get done today. A slow day is still a day I lived well. I will do what I can and let that be enough.",
       "original": true,
       "tags": [
         "Self-compassion"
@@ -69,30 +69,7 @@
       ]
     },
     {
-      "text": "Kindness is invincible if only it is honest, not fawning or insincere.",
-      "author": "Marcus Aurelius",
-      "work": "Meditations, 11.18",
-      "translator": "Gerald Rendall",
-      "tags": [
-        "Stoicism"
-      ]
-    },
-    {
-      "text": "I am allowed to go slowly. Starting again is not failing; it is how anything gets learned. Each new beginning counts as much as the first one did.",
-      "original": true,
-      "tags": [
-        "Self-compassion"
-      ]
-    },
-    {
-      "text": "Being tired is information, not a verdict on my effort. When I am worn out, the kind response is rest, not a lecture. I can give myself what I would gladly give anyone else.",
-      "original": true,
-      "tags": [
-        "Self-compassion"
-      ]
-    },
-    {
-      "text": "I do not have to be productive to be worthy of care. My value was never in my output. When I rest, I am not wasting time; I am looking after the person who does the work.",
+      "text": "Being tired is a signal, not a verdict on my effort. When I am worn out, the kind response is rest, not a lecture. I can give myself what I would gladly give anyone else.",
       "original": true,
       "tags": [
         "Self-compassion"
@@ -131,13 +108,6 @@
       ]
     },
     {
-      "text": "Before I start anything, I will take three slow breaths. Then I will begin. The task does not need me to arrive at it in a hurry.",
-      "original": true,
-      "tags": [
-        "Mindfulness"
-      ]
-    },
-    {
       "text": "I can only do one thing at a time. When my mind runs ahead to the next task, I bring it back to the one in my hands. This one is the only one I can actually do.",
       "original": true,
       "tags": [
@@ -153,7 +123,7 @@
       ]
     },
     {
-      "text": "A hard moment is one moment. It does not have to become the whole day. I can let it be what it is, breathe through it, and notice when it passes.",
+      "text": "A hard moment is one moment. It does not have to become the whole day. I can let it be what it is and notice when it passes.",
       "original": true,
       "tags": [
         "Mindfulness",
@@ -207,14 +177,6 @@
       "original": true,
       "tags": [
         "Stoicism"
-      ]
-    },
-    {
-      "text": "Being productive is not the point of being alive. Some days the most useful thing I can do is rest, think, or spend time with someone. Those days count too.",
-      "original": true,
-      "tags": [
-        "Self-compassion",
-        "Daoism"
       ]
     },
     {

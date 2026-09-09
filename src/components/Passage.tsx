@@ -11,7 +11,6 @@ interface Props {
   caretHeight: number;
   typed: string;
   focused: boolean;
-  started: boolean;
   hidden: boolean;
   inputRef: React.RefObject<HTMLInputElement>;
   onType: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -24,9 +23,9 @@ interface Props {
  * text; the visible characters are coloured by what has been typed. The input
  * sits below the source row in the stack so the links there stay clickable.
  */
-export function Passage({ words, th, fontSize, caretHeight, typed, focused, started, hidden, inputRef, onType, onFocus, onBlur }: Props) {
+export function Passage({ words, th, fontSize, caretHeight, typed, focused, hidden, inputRef, onType, onFocus, onBlur }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
-  useCaret(rootRef, { typedLen: typed.length, focused, started });
+  useCaret(rootRef, { typedLen: typed.length, focused });
 
   return (
     <>

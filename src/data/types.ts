@@ -25,6 +25,8 @@ export interface Passage {
    * Carter, Higginson, Stewart) are safe and citable.
    */
   translator?: string;
+  /** Where the wording was verified. Not rendered. */
+  url?: string;
   /** Original, tradition-inspired writing rather than a sourced excerpt. */
   original?: boolean;
   /** Written by the reader in the "Your own" category. */

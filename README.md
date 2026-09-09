@@ -96,7 +96,7 @@ It runs on every pull request (`ci.yml`) and again before publishing
 **Errors fail CI** — an entry that is neither a credited excerpt nor marked
 original, an excerpt missing its work, a tag outside the vocabulary in
 `types.ts`, a category key that isn't one of the three ids, a character a plain
-keyboard can't type (curly quotes, em dashes), text outside 60–250 characters,
+keyboard can't type (curly quotes, em dashes), text outside 50–250 characters,
 a gendered word ("he who", "a wise man", "her"), or a duplicate. **Warnings
 don't fail**; they are the standing to-do list. One warning to take seriously:
 a noun that ties the passage to one kind of day (laptop, inbox, kitchen, bill).
@@ -105,9 +105,13 @@ scene: productivity and giving yourself space, not closing the laptop at six.
 
 Each passage is one of two things, and the check enforces the difference:
 
-- **An excerpt** — `author` and `work`, plus `translator`. Modern translations
-  are under copyright; pre-1930 editions (Long, Carter, Higginson, Stewart) are
-  safe to quote and worth citing. Current sources: Marcus Aurelius (Long,
+- **An excerpt** — `author` and `work`, plus `translator` for anything quoted
+  in translation and `url` for where the wording was checked. Classical
+  excerpts come from pre-1930 editions (Long, Carter, Rendall, Stewart), since
+  modern translations are under copyright. Modern authors (Goodall, Saunders,
+  Stevenson, Tippett, Dillard, Thich Nhat Hanh, Iyer, David, Ginsburg,
+  Baldwin) are quoted one sentence at a time, credited with work and year, and
+  verified word for word against a reliable page. Current sources: Marcus Aurelius (Long,
   1862), Epictetus (Carter, 1758), Seneca (Stewart, 1889; Gummere, 1917), the
   Tao Te Ching (Legge, 1891), the Dhammapada (Muller, 1881) and Thoreau, who
   wrote in English and so carries no translator. Classical translations

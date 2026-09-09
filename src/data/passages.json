@@ -82,6 +82,106 @@
         "Mindfulness",
         "Self-compassion"
       ]
+    },
+    {
+      "text": "Kindness is invincible if only it is honest, not fawning or insincere.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations, 11.18",
+      "url": "https://archive.org/details/marcusaureliusan00marc",
+      "tags": [
+        "Stoicism"
+      ],
+      "translator": "Gerald Rendall"
+    },
+    {
+      "text": "I am allowed to go slowly. Starting again is not failing; it is how anything gets learned. Each new beginning counts as much as the first one did.",
+      "original": true,
+      "tags": [
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "What you do makes a difference, and you have to decide what kind of difference you want to make.",
+      "author": "Jane Goodall",
+      "work": "Reason for Hope and public talks",
+      "url": "https://janegoodall.org/news/we-are-global-citizens/",
+      "tags": [
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "What I regret most in my life are failures of kindness.",
+      "author": "George Saunders",
+      "work": "Syracuse University commencement address (2013)",
+      "url": "https://jamesclear.com/great-speeches/failures-of-kindness-by-george-saunders",
+      "tags": [
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "Each of us is more than the worst thing we've ever done.",
+      "author": "Bryan Stevenson",
+      "work": "Just Mercy (2014)",
+      "url": "https://eji.org/bryan-stevenson/",
+      "tags": [
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "I can treat myself with patience without avoiding responsibility. I can acknowledge a mistake, correct what I can, and continue.",
+      "original": true,
+      "tags": [
+        "Self-compassion",
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "I can be honest without being harsh. Clear words and a calm tone can exist together.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "I do not need perfect words to show care. Listening carefully and responding with respect are often enough.",
+      "original": true,
+      "tags": [
+        "Buddhism",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "Kindness does not require agreement. I can respect another person while holding my own view.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "I can be present for myself before trying to fix anything. Paying attention to what hurts is already a form of care.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "When I am hurt, I can ask for help instead of expecting others to guess what I need. Honest words can make repair possible.",
+      "original": true,
+      "tags": [
+        "Self-compassion",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "Understanding takes attention, time, and a willingness to listen. I can offer those before deciding what another person means.",
+      "original": true,
+      "tags": [
+        "Buddhism",
+        "Mindfulness"
+      ]
     }
   ],
   "pres": [
@@ -125,6 +225,118 @@
     {
       "text": "A hard moment is one moment. It does not have to become the whole day. I can let it be what it is and notice when it passes.",
       "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "Listening is about being present, not just about being quiet.",
+      "author": "Krista Tippett",
+      "work": "Becoming Wise (2016)",
+      "url": "https://onbeing.org/wp-content/uploads/2019/02/chapter-one-becoming-wise_discussion-guide.pdf",
+      "tags": [
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "How we spend our days is, of course, how we spend our lives.",
+      "author": "Annie Dillard",
+      "work": "The Writing Life (1989)",
+      "url": "https://www.themarginalian.org/2013/06/07/annie-dillard-the-writing-life-1/",
+      "tags": [
+        "Mindfulness",
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "The present moment is filled with joy and happiness. If you are attentive, you will see it.",
+      "author": "Thich Nhat Hanh",
+      "work": "Peace Is Every Step (1991)",
+      "url": "https://plumvillage.org/about/thich-nhat-hanh",
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "In an age of acceleration, nothing can be more exhilarating than going slow.",
+      "author": "Pico Iyer",
+      "work": "The Art of Stillness (2014)",
+      "url": "https://www.dailygood.org/story/936/the-art-of-stillness-pico-iyer/",
+      "tags": [
+        "Mindfulness",
+        "Daoism"
+      ]
+    },
+    {
+      "text": "I can do one thing at a time. When my attention wanders, I can bring it back without judging myself.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "I do not need to solve everything at once. I can give my full attention to what is in front of me.",
+      "original": true,
+      "tags": [
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "This moment does not need to be remarkable to matter. I can notice it clearly and take part in it.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Daoism"
+      ]
+    },
+    {
+      "text": "My mind may return to the past or move ahead to the future. I can notice that and come back to what I am doing.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "Slowing down does not mean falling behind. It helps me see what deserves my attention.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Daoism"
+      ]
+    },
+    {
+      "text": "I do not need to rush toward the next moment. I can stop, breathe, and give my attention to what is happening now.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "Rest begins when I stop treating this moment as only a step toward the next one. I can let myself be here without needing to get somewhere else.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "A strong feeling can be present without taking over. I can notice it, breathe, and wait before deciding what to do.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "My destination is the here and now, the only time and place where true life is possible.",
+      "author": "Thich Nhat Hanh",
+      "work": "The Art of Mindful Living",
+      "url": "https://plumvillage.org/mindfulness/mindfulness-practice",
       "tags": [
         "Mindfulness",
         "Buddhism"
@@ -194,6 +406,87 @@
       "translator": "Gerald Rendall",
       "tags": [
         "Stoicism"
+      ]
+    },
+    {
+      "text": "Discomfort is the price of admission to a meaningful life.",
+      "author": "Susan David",
+      "work": "The Gift and Power of Emotional Courage, TED (2017)",
+      "url": "https://www.linkedin.com/posts/susanadavidphd_discomfort-is-the-price-of-admission-to-a-activity-7010967875402235904-vxv1",
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "Real change, enduring change, happens one step at a time.",
+      "author": "Ruth Bader Ginsburg",
+      "work": "Interviews and public remarks",
+      "url": "https://women.ca.gov/the-notorious-rbg/",
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "Not everything that is faced can be changed, but nothing can be changed until it is faced.",
+      "author": "James Baldwin",
+      "work": "As Much Truth as One Can Bear (1962)",
+      "url": "https://www.justiceinnovationlab.org/moving-the-needle/james-baldwin",
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "A difficult moment is not the whole story. I can respond to what is happening now and let the next step come afterward.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "Progress does not need to be fast to be real. I can continue at a pace I can sustain.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Daoism"
+      ]
+    },
+    {
+      "text": "Changing my mind when I learn something new is a strength. I do not have to defend an outdated view.",
+      "original": true,
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "I can take useful criticism without accepting every judgment. I will keep what helps and leave the rest.",
+      "original": true,
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "I can pause before trusting my first interpretation. There may be more to this situation than I can see right now.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "I can release an expectation that is making life harder. Letting go of one fixed idea may make room for a better way forward.",
+      "original": true,
+      "tags": [
+        "Daoism",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "The future is shaped by how I meet this moment. I can take care of what is here instead of carrying everything that may come next.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
       ]
     }
   ]

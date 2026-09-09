@@ -52,14 +52,16 @@ if (!maxBlock) {
 // the target band is the 30–60s the app is designed around, at an unhurried
 // 40wpm.
 const MAX = Number(maxBlock[1]);
-const MIN = 60;
+// 50 admits a strong single sentence ("What I regret most in my life are failures of kindness.").
+const MIN = 50;
 const TARGET_MIN = 100;
 const TARGET_MAX = 220;
 const MIN_POOL = 30;
 const WPM = 40;
 
-// Authors who wrote in English, so an excerpt of theirs has no translator to credit.
-const ENGLISH = ['Henry David Thoreau', 'Ralph Waldo Emerson'];
+// Authors quoted in translation, so an excerpt of theirs must credit the
+// translator. Everyone else in the file wrote in English.
+const TRANSLATED = ['Seneca', 'Marcus Aurelius', 'Epictetus', 'Laozi', 'Zhuangzi', 'The Buddha', 'Michel de Montaigne', 'Plutarch', 'Boethius', 'Epicurus'];
 
 // A passage is read as a daily affirmation by anyone, so it must not assume a
 // gender ("he who...", "a wise man") or describe one person's particular life
@@ -105,8 +107,8 @@ for (const [cat, list] of Object.entries(PASSAGES)) {
     if (isExcerpt && isOriginal) errors.push(`${at}: has an author and is marked original — pick one`);
     if (!isExcerpt && !isOriginal) errors.push(`${at}: neither an excerpt (author + work) nor marked original`);
     if (isExcerpt && !p.work) errors.push(`${at}: excerpt from ${p.author} is missing \`work\``);
-    if (isOriginal && (p.work || p.translator)) errors.push(`${at}: original writing must not carry work/translator`);
-    if (isExcerpt && !p.translator && !ENGLISH.includes(p.author)) {
+    if (isOriginal && (p.work || p.translator || p.url)) errors.push(`${at}: original writing must not carry work/translator/url`);
+    if (isExcerpt && !p.translator && TRANSLATED.includes(p.author)) {
       warnings.push(`${at}: ${p.author} — no \`translator\`; confirm the edition and that it is out of copyright`);
     }
 

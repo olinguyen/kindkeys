@@ -26,6 +26,8 @@ export function CategoryPills({ active, th, onPick, compact }: Props) {
             role="tab"
             aria-selected={selected}
             className="kk-pill"
+            // A pill acts on the passage without taking focus from it.
+            onMouseDown={(e) => e.preventDefault()}
             onClick={() => onPick(c.id)}
             style={{
               // The selected pill takes the accent mixed toward the text colour,

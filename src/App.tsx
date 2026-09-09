@@ -101,12 +101,27 @@ export default function App() {
     if (el && document.activeElement !== el) el.focus({ preventScroll: true });
   }, [about, cat.custom, composing, run.end]);
 
-  // On load, on category switch, after "Try another", after closing About and
-  // after saving a custom passage — the caret is live without a click.
+  // On load, after closing About and after saving a custom passage — the caret
+  // is live without a click. Buttons that change the passage also focus
+  // synchronously inside their own click (see `refocus`), because iOS only
+  // honours a programmatic focus while a gesture is still on the stack.
   useEffect(() => {
     if (compact && !interacted.current) return;
     focusInput();
   }, [compact, catId, runKey, about, composing, focusInput]);
+
+  /**
+   * Focus the input from inside a click handler. `id` is the category the
+   * click is switching to, so the keyboard is not raised for a passage that
+   * cannot be typed: a finished run, or a custom passage still being written.
+   */
+  const refocus = (id: CatId = catId, nextOffset = passageIndex[id] ?? 0) => {
+    if (about) return;
+    const target = CATS.find((c) => c.id === id)!;
+    const key = target.custom ? `custom:${customVersion}` : `${id}:${nextOffset}`;
+    if ((target.custom && composing) || runs[key]?.end) return;
+    inputRef.current?.focus({ preventScroll: true });
+  };
 
   /* ── Word sparks ───────────────────────────────────────────────── */
 
@@ -217,6 +232,7 @@ export default function App() {
     prevDoneWords.current = 0;
     prevLanded.current = -1;
     setCatId(id);
+    refocus(id);
   };
 
   const onNext = () => {
@@ -224,6 +240,7 @@ export default function App() {
     prevDoneWords.current = 0;
     prevLanded.current = -1;
     setPassageIndex((prev) => ({ ...prev, [catId]: (prev[catId] ?? 0) + 1 }));
+    refocus(catId, offset + 1);
   };
 
   const onReset = () => {
@@ -289,6 +306,10 @@ export default function App() {
     document.body.style.background = th.bg;
   }, [th.bg]);
 
+  // Ghost buttons on the stage act on the passage without taking focus from
+  // it, so the caret never flickers off while the reader clicks around.
+  const keepFocus = (e: React.MouseEvent) => e.preventDefault();
+
   /* ── Pieces shared by both layouts ─────────────────────────────── */
 
   const illustrations = (
@@ -317,7 +338,6 @@ export default function App() {
       caretHeight={compact ? 28 : 40}
       typed={run.typed}
       focused={focused}
-      started={build.started}
       hidden={false}
       inputRef={inputRef}
       onType={onType}
@@ -330,6 +350,7 @@ export default function App() {
     <button
       type="button"
       className="btn btn-ghost"
+      onMouseDown={keepFocus}
       onClick={(e) => {
         e.stopPropagation();
         onReset();
@@ -370,6 +391,7 @@ export default function App() {
     <button
       type="button"
       className="btn btn-ghost"
+      onMouseDown={keepFocus}
       onClick={(e) => {
         e.stopPropagation();
         onNext();
@@ -387,8 +409,7 @@ export default function App() {
 
   const onStageClick = () => {
     interacted.current = true;
-    if (about || (cat.custom && composing)) return;
-    inputRef.current?.focus();
+    refocus();
   };
 
   const pageStyle = {

@@ -65,15 +65,30 @@ body {
 
 .kk-brand span {
   display: inline-block;
-  transition: color 0.5s, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+  transition: color 0.5s;
 }
 
-.kk-brand:hover span:first-child {
-  transform: translateY(-2px) rotate(-3deg);
+/* Each word tilts on its own; the transform is desktop-only (hover-capable
+   pointer) so a tap on touch devices never leaves a word stuck tilted. */
+@media (hover: hover) and (pointer: fine) {
+  .kk-brand span {
+    transition: color 0.5s, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+  }
+
+  .kk-brand span:first-child:hover {
+    transform: translateY(-2px) rotate(-3deg);
+  }
+
+  .kk-brand span:last-child:hover {
+    transform: translateY(-2px) rotate(3deg);
+  }
 }
 
-.kk-brand:hover span:last-child {
-  transform: translateY(-2px) rotate(3deg);
+@media (prefers-reduced-motion: reduce) {
+  .kk-page .kk-brand span {
+    transition: color 0.5s !important;
+    transform: none !important;
+  }
 }
 
 .kk-pills {

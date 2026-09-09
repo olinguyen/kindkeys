@@ -13,7 +13,8 @@ Four categories, each with its own palette and its own illustration:
 | **Perspective** | Balance, change, what is and isn't yours to control | Ten stones fall in slow motion and settle into a cairn |
 | **Your own** | Up to 250 characters you write yourself | A bamboo shishi-odoshi fills and pours into a stone basin |
 
-Excerpts carry their author and work (Seneca, Marcus Aurelius, Epictetus);
+Excerpts carry their author, work and translator (Seneca, Marcus Aurelius,
+Epictetus, Laozi, the Dhammapada, Thoreau);
 original tradition-inspired writing is labelled as such and tagged with the
 tradition it draws on.
 
@@ -94,20 +95,40 @@ It runs on every pull request (`ci.yml`) and again before publishing
 
 **Errors fail CI** — an entry that is neither a credited excerpt nor marked
 original, an excerpt missing its work, a tag outside the vocabulary in
-`types.ts`, text outside 60–250 characters, or a duplicate. **Warnings don't
-fail**; they are the standing to-do list.
+`types.ts`, a category key that isn't one of the three ids, a character a plain
+keyboard can't type (curly quotes, em dashes), text outside 50–250 characters,
+a gendered word ("he who", "a wise man", "her"), or a duplicate. **Warnings
+don't fail**; they are the standing to-do list. One warning to take seriously:
+a noun that ties the passage to one kind of day (laptop, inbox, kitchen, bill).
+A passage is read as anyone's daily affirmation, so it frames the idea, not the
+scene: productivity and giving yourself space, not closing the laptop at six.
 
 Each passage is one of two things, and the check enforces the difference:
 
-- **An excerpt** — `author` and `work`, plus `translator`. Modern translations
-  are under copyright; pre-1930 editions (Long, Carter, Higginson, Stewart) are
-  safe to quote and worth citing. Every excerpt currently warns because none has
-  its translation confirmed yet.
+- **An excerpt** — `author` and `work`, plus `translator` for anything quoted
+  in translation and `url` for where the wording was checked. Classical
+  excerpts come from pre-1930 editions (Long, Carter, Rendall, Stewart), since
+  modern translations are under copyright. Modern authors (Goodall,
+  Tippett, Dillard, Thich Nhat Hanh, David, Ginsburg,
+  Baldwin) are quoted one sentence at a time, credited with work and year, and
+  verified word for word against a reliable page. Current sources: Marcus Aurelius (Long,
+  1862), Epictetus (Carter, 1758), Seneca (Stewart, 1889; Gummere, 1917), the
+  Tao Te Ching (Legge, 1891), the Dhammapada (Muller, 1881) and Thoreau, who
+  wrote in English and so carries no translator. Classical translations
+  default to "he" and "a man"; only their impersonal or second-person
+  sentences are quoted.
 - **Original writing** — `original: true` and a tradition tag, no author. It
   renders as "Original writing, inspired by". Keep genuinely borrowed wording
   out of these: a passage here previously opened with a line from *Tao Te Ching*
   33 while claiming to be original, which is the mistake this check exists to
   catch.
+
+New passages come from the `grow-passages` workflow in `.claude/workflows/`,
+which sources excerpts from online public-domain editions and refetches each to
+confirm the wording, or writes originals and has an editor score them against
+the principles and the existing pool. Its result merges with
+`node scripts/merge-passages.mjs <result.json>`. Passages from two hosts the
+verifier could not reach were checked by hand against a second copy.
 
 To add a tag, add it to `TAGS` in `src/data/types.ts` — TypeScript derives the
 `Tag` union from that list and the checker reads it, so there is one place to

@@ -3,7 +3,8 @@
  * Checks the curated passages and prints them as a review table.
  *
  * Errors fail the build — a passage that is mislabelled, over length, tagged
- * with a word that isn't in the vocabulary, or duplicated. Warnings don't fail;
+ * with a word that isn't in the vocabulary, duplicated, or written with
+ * gendered language. Warnings don't fail;
  * they're the standing to-do list (an excerpt whose translation isn't yet
  * credited, a category whose pool is small enough that the day rotation
  * visibly loops).
@@ -29,15 +30,45 @@ if (!tagsBlock) {
 }
 const TAGS = [...tagsBlock[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
 
-// Bounds. MAX matches the cap on a custom passage and the size at which the
-// app drops the passage a font size; the target band is the 30–60s the app is
-// designed around, at an unhurried 40wpm.
-const MAX = 250;
-const MIN = 60;
+// The category ids live in types.ts too (`CuratedCatId`), derived from `CatId`.
+// A key that isn't one of them passes the `as Record<...>` cast in passages.ts
+// and then crashes the app on `cat.passages.length`, so check it here.
+const catIdBlock = typesSrc.match(/export type CatId = ([^;]+);/);
+if (!catIdBlock) {
+  console.error('check:passages — could not find `export type CatId = ...;` in src/data/types.ts');
+  process.exit(2);
+}
+const CAT_IDS = [...catIdBlock[1].matchAll(/'([^']+)'/g)].map((m) => m[1]).filter((id) => id !== 'custom');
+
+// The length cap is `MAX_CHARS` in categories.ts — the same number caps a
+// custom passage, so read it rather than keep a copy here.
+const maxBlock = read('src/data/categories.ts').match(/export const MAX_CHARS = (\d+);/);
+if (!maxBlock) {
+  console.error('check:passages — could not find `export const MAX_CHARS = <n>;` in src/data/categories.ts');
+  process.exit(2);
+}
+
+// Bounds. MAX is also the size at which the app drops the passage a font size;
+// the target band is the 30–60s the app is designed around, at an unhurried
+// 40wpm.
+const MAX = Number(maxBlock[1]);
+// 50 admits a strong single sentence ("What I regret most in my life are failures of kindness.").
+const MIN = 50;
 const TARGET_MIN = 100;
 const TARGET_MAX = 220;
 const MIN_POOL = 30;
 const WPM = 40;
+
+// Authors quoted in translation, so an excerpt of theirs must credit the
+// translator. Everyone else in the file wrote in English.
+const TRANSLATED = ['Seneca', 'Marcus Aurelius', 'Epictetus', 'Laozi', 'Zhuangzi', 'The Buddha', 'Michel de Montaigne', 'Plutarch', 'Boethius', 'Epicurus'];
+
+// A passage is read as a daily affirmation by anyone, so it must not assume a
+// gender ("he who...", "a wise man") or describe one person's particular life
+// (a laptop, an inbox, a specific relative). Gendered words are an error; the
+// scene nouns are a warning, because "work" in "work done with care" is fine.
+const GENDERED = /\b(he|him|his|himself|she|her|hers|herself|man|men|woman|women|mankind|father|mother|dad|mum|mom|brother|sister|son|daughter|husband|wife|boy|girl|gentleman|gentlemen|lady|ladies)\b/i;
+const SCENIC = /\b(laptop|inbox|email|emails|phone|screen|desk|meeting|meetings|deadline|calendar|colleague|colleagues|boss|office|car|traffic|bus|kitchen|dishes|dishwasher|gym|pharmacy|salary|paycheck|payday|bill|bills|dollars)\b/i;
 
 const errors = [];
 const warnings = [];
@@ -45,6 +76,12 @@ const seen = new Map(); // text -> "cat #n"
 const openings = new Map(); // first 40 chars -> "cat #n"
 
 const secs = (chars) => (chars / 5 / WPM) * 60;
+
+// Category keys: exactly the curated ids, in any order.
+for (const id of CAT_IDS) if (!(id in PASSAGES)) errors.push(`${id}: category missing from passages.json`);
+for (const key of Object.keys(PASSAGES)) {
+  if (!CAT_IDS.includes(key)) errors.push(`${key}: not a category — expected one of ${CAT_IDS.join(', ')}`);
+}
 
 console.log(`\n${'category'.padEnd(11)} ${'#'.padEnd(2)} ${'chars'.padStart(5)} ${'~time'.padStart(6)}  ${'attribution'.padEnd(38)} tags`);
 console.log('-'.repeat(104));
@@ -70,8 +107,8 @@ for (const [cat, list] of Object.entries(PASSAGES)) {
     if (isExcerpt && isOriginal) errors.push(`${at}: has an author and is marked original — pick one`);
     if (!isExcerpt && !isOriginal) errors.push(`${at}: neither an excerpt (author + work) nor marked original`);
     if (isExcerpt && !p.work) errors.push(`${at}: excerpt from ${p.author} is missing \`work\``);
-    if (isOriginal && (p.work || p.translator)) errors.push(`${at}: original writing must not carry work/translator`);
-    if (isExcerpt && !p.translator) {
+    if (isOriginal && (p.work || p.translator || p.url)) errors.push(`${at}: original writing must not carry work/translator/url`);
+    if (isExcerpt && !p.translator && TRANSLATED.includes(p.author)) {
       warnings.push(`${at}: ${p.author} — no \`translator\`; confirm the edition and that it is out of copyright`);
     }
 
@@ -81,6 +118,18 @@ for (const [cat, list] of Object.entries(PASSAGES)) {
     if (t && t.length < MIN) errors.push(`${at}: ${t.length} chars, under the ${MIN} floor`);
     if (t !== t.trim()) errors.push(`${at}: leading or trailing whitespace`);
     if (/\s{2,}/.test(t)) errors.push(`${at}: repeated whitespace`);
+    // The typing engine compares characters exactly, so anything a plain
+    // keyboard can't produce — curly quotes, em dashes, non-breaking spaces —
+    // is a typo the reader can never fix.
+    const odd = [...new Set(t.match(/[^\x20-\x7e]/g) ?? [])];
+    if (odd.length) {
+      const list = odd.map((c) => `"${c}" (U+${c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')})`).join(', ');
+      errors.push(`${at}: untypeable character${odd.length > 1 ? 's' : ''} ${list} — use plain ASCII punctuation`);
+    }
+    const gendered = t.match(GENDERED);
+    if (gendered) errors.push(`${at}: gendered language ("${gendered[0]}") — passages must read as anyone's affirmation`);
+    const scenic = t.match(SCENIC);
+    if (scenic) warnings.push(`${at}: "${scenic[0]}" ties the passage to one kind of day — frame the idea instead of the scene`);
     if (t.length >= MIN && t.length <= MAX && (t.length < TARGET_MIN || t.length > TARGET_MAX)) {
       warnings.push(`${at}: ${t.length} chars ≈ ${secs(t.length).toFixed(0)}s, outside the 30–60s band`);
     }

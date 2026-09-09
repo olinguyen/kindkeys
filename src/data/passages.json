@@ -1,7 +1,14 @@
 {
   "kind": [
     {
-      "text": "I am steady. I am allowed to take up space, and I trust the pace I am moving at today. I do not need to be finished to be worthy of rest. I can hold what is hard and still be gentle with myself.",
+      "text": "I am steady. I do not need to be finished to be worthy of rest. When something is hard, I can slow down, ask for help, and speak to myself as I would to a friend.",
+      "original": true,
+      "tags": [
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "You can be patient with yourself the way you are patient with a friend who is learning. You are allowed to go slowly. You are allowed to begin again, and the beginning still counts.",
       "original": true,
       "tags": [
         "Self-compassion"
@@ -10,23 +17,185 @@
     {
       "text": "Wherever there is a human being, there is an opportunity for a kindness.",
       "author": "Seneca",
-      "work": "On the Happy Life",
+      "work": "On the Happy Life, 24",
+      "translator": "after Aubrey Stewart",
       "tags": [
         "Stoicism"
       ]
     },
     {
-      "text": "You can be patient with yourself the way you are patient with a friend who is learning. You are allowed to go slowly. You are allowed to begin again, and the beginning still counts.",
+      "text": "I do not have to earn rest by finishing everything first. Rest is part of the work, not a reward for it. I can stop when I am tired and start again when I am ready.",
+      "original": true,
+      "tags": [
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "My worth is not measured by how much I get done today. A slow day is still a day I lived well. I will do what I can and let that be enough.",
+      "original": true,
+      "tags": [
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "I speak to myself all day long. Today I will use the tone I would use with someone I care about. If I would not say it to a friend, I do not need to say it to myself.",
+      "original": true,
+      "tags": [
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "Making a mistake means I tried something. I can name what went wrong without deciding what it says about me. Then I fix what I can and move on to the next thing.",
+      "original": true,
+      "tags": [
+        "Self-compassion",
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "Patience with others begins with patience for myself. When I am gentle with my own slow progress, I have more gentleness left over for everyone else.",
       "original": true,
       "tags": [
         "Self-compassion",
         "Buddhism"
       ]
+    },
+    {
+      "text": "Everyone I meet today is carrying something I cannot see. I do not need to know what it is to be kind. A little warmth costs me nothing and may be the best part of someone's day.",
+      "original": true,
+      "tags": [
+        "Buddhism",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "Being tired is a signal, not a verdict on my effort. When I am worn out, the kind response is rest, not a lecture. I can give myself what I would gladly give anyone else.",
+      "original": true,
+      "tags": [
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "Not every thought about myself is true. The thought that I am not enough is a thought, not a fact. I can notice it, name it, and go back to what I was doing.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "I am allowed to go slowly. Starting again is not failing; it is how anything gets learned. Each new beginning counts as much as the first one did.",
+      "original": true,
+      "tags": [
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "What you do makes a difference, and you have to decide what kind of difference you want to make.",
+      "author": "Jane Goodall",
+      "work": "Reason for Hope and public talks",
+      "url": "https://janegoodall.org/news/we-are-global-citizens/",
+      "tags": [
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "I can treat myself with patience without avoiding responsibility. I can acknowledge a mistake, correct what I can, and continue.",
+      "original": true,
+      "tags": [
+        "Self-compassion",
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "I can be honest without being harsh. Clear words and a calm tone can exist together.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "I do not need perfect words to show care. Listening carefully and responding with respect are often enough.",
+      "original": true,
+      "tags": [
+        "Buddhism",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "Kindness does not require agreement. I can respect another person while holding my own view.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "I can be present for myself before trying to fix anything. Paying attention to what hurts is already a form of care.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "When I am hurt, I can ask for help instead of expecting others to guess what I need. Honest words can make repair possible.",
+      "original": true,
+      "tags": [
+        "Self-compassion",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "Understanding takes attention, time, and a willingness to listen. I can offer those before deciding what another person means.",
+      "original": true,
+      "tags": [
+        "Buddhism",
+        "Mindfulness"
+      ]
     }
   ],
   "pres": [
     {
-      "text": "Right now there is a breath moving through me. I notice the weight of my hands, the sound of the room, the light where it falls. Nothing needs solving in this moment. I am here, and here is enough.",
+      "text": "Right now there is a breath moving in and out. I can feel my feet on the floor and the weight of my hands. Nothing in this moment needs solving. I only need to be here for it.",
+      "original": true,
+      "tags": [
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "I do not have to feel calm to act well. I can be unsettled and still do the next small thing. Steadiness usually follows action, not the other way around.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "When everything feels like too much, I am usually carrying the whole day at once. I can set the day down. The next ten minutes are all I have to manage, and I can manage ten minutes.",
+      "original": true,
+      "tags": [
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "I can only do one thing at a time. When my mind runs ahead to the next task, I bring it back to the one in my hands. This one is the only one I can actually do.",
+      "original": true,
+      "tags": [
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "Worry about the future does not change the future. It only spends the present. I will bring my attention back to what is in front of me and do that one thing well.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "A hard moment is one moment. It does not have to become the whole day. I can let it be what it is and notice when it passes.",
       "original": true,
       "tags": [
         "Mindfulness",
@@ -34,43 +203,252 @@
       ]
     },
     {
-      "text": "Do not disturb yourself by picturing your life as a whole. Ask yourself about each present difficulty: what is there in this that cannot be borne? You will be ashamed to confess it.",
-      "author": "Marcus Aurelius",
-      "work": "Meditations, 8.36",
+      "text": "Listening is about being present, not just about being quiet.",
+      "author": "Krista Tippett",
+      "work": "Becoming Wise (2016)",
+      "url": "https://onbeing.org/wp-content/uploads/2019/02/chapter-one-becoming-wise_discussion-guide.pdf",
       "tags": [
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "How we spend our days is, of course, how we spend our lives.",
+      "author": "Annie Dillard",
+      "work": "The Writing Life (1989)",
+      "url": "https://www.themarginalian.org/2013/06/07/annie-dillard-the-writing-life-1/",
+      "tags": [
+        "Mindfulness",
         "Stoicism"
       ]
     },
     {
-      "text": "The kettle, the cold floor, the first light on the wall. Ordinary things are not waiting to become something else. I can meet them as they are, one at a time, and let that be the whole task.",
+      "text": "The present moment is filled with joy and happiness. If you are attentive, you will see it.",
+      "author": "Thich Nhat Hanh",
+      "work": "Peace Is Every Step (1991)",
+      "url": "https://plumvillage.org/about/thich-nhat-hanh",
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "I can do one thing at a time. When my attention wanders, I can bring it back without judging myself.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "I do not need to solve everything at once. I can give my full attention to what is in front of me.",
+      "original": true,
+      "tags": [
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "This moment does not need to be remarkable to matter. I can notice it clearly and take part in it.",
       "original": true,
       "tags": [
         "Mindfulness",
         "Daoism"
       ]
+    },
+    {
+      "text": "My mind may return to the past or move ahead to the future. I can notice that and come back to what I am doing.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "Slowing down does not mean falling behind. It helps me see what deserves my attention.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Daoism"
+      ]
+    },
+    {
+      "text": "I do not need to rush toward the next moment. I can stop, breathe, and give my attention to what is happening now.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "Rest begins when I stop treating this moment as only a step toward the next one. I can let myself be here without needing to get somewhere else.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "A strong feeling can be present without taking over. I can notice it, breathe, and wait before deciding what to do.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "My destination is the here and now, the only time and place where true life is possible.",
+      "author": "Thich Nhat Hanh",
+      "work": "The Art of Mindful Living",
+      "url": "https://plumvillage.org/mindfulness/mindfulness-practice",
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
     }
   ],
   "persp": [
     {
-      "text": "Some things are within our power, while others are not. Within our power are opinion, motivation, desire, aversion, and in a word, whatever is of our own doing; not within our power are our body, our property, reputation, office.",
+      "text": "Most of what worries me today will not matter in a year. I can hold my plans loosely and let the day change them. What is mine to do, I will do. What is not mine, I can set down.",
+      "original": true,
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "I do not have to force today into the shape I planned. When something will not bend, I can bend instead. I will do the task in front of me, stop when it is done, and let that be enough.",
+      "original": true,
+      "tags": [
+        "Daoism",
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "Some things are in our control and others not. Things in our control are opinion, pursuit, desire, aversion, and, in a word, whatever are our own actions.",
       "author": "Epictetus",
       "work": "Enchiridion, 1",
+      "translator": "Elizabeth Carter",
       "tags": [
         "Stoicism"
       ]
     },
     {
-      "text": "Most of what worries me will not matter in a year. I can hold my plans loosely and let the day change them. What is mine to do, I will do. What is not mine, I can set down.",
+      "text": "Some things are up to me: my effort, my attention, my words. Most other things are not. I will put my energy where it can make a difference and let the rest go.",
       "original": true,
       "tags": [
         "Stoicism"
       ]
     },
     {
-      "text": "Enough is a place I can choose to stand. Softness outlasts rigidity, and yielding is not the same as losing. I can set down the shape I planned for today and still arrive somewhere good.",
+      "text": "Don't demand that things happen as you wish, but wish that they happen as they do happen, and you will go on well.",
+      "author": "Epictetus",
+      "work": "Enchiridion, 8",
+      "translator": "Elizabeth Carter",
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "I cannot control the outcome, only the attempt. I will make the attempt as well as I can and then let the result be what it is. That is the whole of my job.",
       "original": true,
       "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "A hard day is still only one day. Tomorrow starts fresh whether today went well or not. I will finish what I can, sleep, and begin again.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Self-compassion"
+      ]
+    },
+    {
+      "text": "Most of the things we say or do are not necessary; get rid of them, and you will gain time and tranquillity.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations, 4.24",
+      "translator": "Gerald Rendall",
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "Discomfort is the price of admission to a meaningful life.",
+      "author": "Susan David",
+      "work": "The Gift and Power of Emotional Courage, TED (2017)",
+      "url": "https://www.linkedin.com/posts/susanadavidphd_discomfort-is-the-price-of-admission-to-a-activity-7010967875402235904-vxv1",
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "Real change, enduring change, happens one step at a time.",
+      "author": "Ruth Bader Ginsburg",
+      "work": "Interviews and public remarks",
+      "url": "https://women.ca.gov/the-notorious-rbg/",
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "Not everything that is faced can be changed, but nothing can be changed until it is faced.",
+      "author": "James Baldwin",
+      "work": "As Much Truth as One Can Bear (1962)",
+      "url": "https://www.justiceinnovationlab.org/moving-the-needle/james-baldwin",
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "A difficult moment is not the whole story. I can respond to what is happening now and let the next step come afterward.",
+      "original": true,
+      "tags": [
+        "Stoicism",
+        "Mindfulness"
+      ]
+    },
+    {
+      "text": "Progress does not need to be fast to be real. I can continue at a pace I can sustain.",
+      "original": true,
+      "tags": [
+        "Stoicism",
         "Daoism"
+      ]
+    },
+    {
+      "text": "Changing my mind when I learn something new is a strength. I do not have to defend an outdated view.",
+      "original": true,
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "I can take useful criticism without accepting every judgment. I will keep what helps and leave the rest.",
+      "original": true,
+      "tags": [
+        "Stoicism"
+      ]
+    },
+    {
+      "text": "I can pause before trusting my first interpretation. There may be more to this situation than I can see right now.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "I can release an expectation that is making life harder. Letting go of one fixed idea may make room for a better way forward.",
+      "original": true,
+      "tags": [
+        "Daoism",
+        "Buddhism"
+      ]
+    },
+    {
+      "text": "The future is shaped by how I meet this moment. I can take care of what is here instead of carrying everything that may come next.",
+      "original": true,
+      "tags": [
+        "Mindfulness",
+        "Buddhism"
       ]
     }
   ]

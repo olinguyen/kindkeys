@@ -109,7 +109,7 @@ Each passage is one of two things, and the check enforces the difference:
   in translation and `url` for where the wording was checked. Classical
   excerpts come from pre-1930 editions (Long, Carter, Rendall, Stewart), since
   modern translations are under copyright. Modern authors (Goodall,
-  Tippett, Dillard, Thich Nhat Hanh, Iyer, David, Ginsburg,
+  Tippett, Dillard, Thich Nhat Hanh, David, Ginsburg,
   Baldwin) are quoted one sentence at a time, credited with work and year, and
   verified word for word against a reliable page. Current sources: Marcus Aurelius (Long,
   1862), Epictetus (Carter, 1758), Seneca (Stewart, 1889; Gummere, 1917), the

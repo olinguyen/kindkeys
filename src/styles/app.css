@@ -186,6 +186,23 @@ body {
   background: color-mix(in oklch, var(--kk-accent) 55%, var(--color-text));
 }
 
+/* A key-cap inside a button: the shortcut sits beside the label it triggers,
+   a shade lighter than the button so it reads as a hint rather than a second
+   control. */
+.kk-kbd {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 6px 2px;
+  font: 600 11px/1.3 var(--font-body);
+  letter-spacing: 0.02em;
+  color: inherit;
+  opacity: 0.85;
+  background: color-mix(in oklch, currentColor 16%, transparent);
+  border: 1px solid color-mix(in oklch, currentColor 22%, transparent);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+}
+
 .kk-page .input {
   caret-color: var(--kk-accent);
 }

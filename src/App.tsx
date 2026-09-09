@@ -243,7 +243,7 @@ export default function App() {
     refocus(catId, offset + 1);
   };
 
-  const onReset = () => {
+  const onReset = useCallback(() => {
     interacted.current = true;
     prevDoneWords.current = 0;
     prevLanded.current = 0;
@@ -253,7 +253,24 @@ export default function App() {
     setResetToken((t) => t + 1);
     setNow(Date.now());
     inputRef.current?.focus({ preventScroll: true });
-  };
+  }, [runKey]);
+
+  // Once the passage is done the field has blurred, so Enter has nowhere to
+  // go — it becomes "Once more". Only then: mid-run the key is just a typo.
+  const done = build.doneAll && reading;
+  useEffect(() => {
+    if (!done || about) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' || e.repeat || e.defaultPrevented) return;
+      if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+      // A focused button or link already acts on Enter; don't act twice.
+      if ((e.target as HTMLElement | null)?.closest?.('button, a, input, textarea')) return;
+      e.preventDefault();
+      onReset();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [done, about, onReset]);
 
   const onDraft = (v: string) => {
     const t = v.replace(/\s+/g, ' ').trimStart();
@@ -404,7 +421,7 @@ export default function App() {
   );
 
   const summary = (
-    <Summary cat={cat} build={build} fix={run.fix} reps={repeats} subline={subline} onAgain={onReset} compact={compact} />
+    <Summary cat={cat} build={build} fix={run.fix} reps={repeats} subline={subline} onAgain={onReset} compact={compact} keyHint={!touch} />
   );
 
   const onStageClick = () => {

@@ -13,13 +13,15 @@ interface Props {
   subline: string;
   onAgain: () => void;
   compact: boolean;
+  /** Show the Enter key-cap on "Once more" — there is a real keyboard to press it on. */
+  keyHint: boolean;
 }
 
 /**
  * The card that slides in on completion: how it went, then "Once more" with the
  * tally beside it — the two things the eye wants where it lands.
  */
-export function Summary({ cat, build, fix, reps, subline, onAgain, compact }: Props) {
+export function Summary({ cat, build, fix, reps, subline, onAgain, compact, keyHint }: Props) {
   const th = cat.th;
   const stats = [
     { label: 'Speed', value: build.wpm, unit: 'wpm' },
@@ -78,6 +80,7 @@ export function Summary({ cat, build, fix, reps, subline, onAgain, compact }: Pr
           type="button"
           className="btn btn-primary"
           onClick={onAgain}
+          aria-keyshortcuts={keyHint ? 'Enter' : undefined}
           style={{
             whiteSpace: 'nowrap',
             fontFamily: 'var(--font-body)',
@@ -90,6 +93,11 @@ export function Summary({ cat, build, fix, reps, subline, onAgain, compact }: Pr
         >
           <RotateIcon />
           Once more
+          {keyHint && (
+            <kbd className="kk-kbd" aria-hidden>
+              ↵ Enter
+            </kbd>
+          )}
         </button>
         {reps > 0 && <Tally reps={reps} th={th} />}
       </div>

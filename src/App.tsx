@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AboutDialog } from './components/AboutDialog';
 import { CategoryPills } from './components/CategoryPills';
 import { Compose } from './components/Compose';
@@ -8,7 +8,8 @@ import { Passage } from './components/Passage';
 import { ProgressRing } from './components/ProgressRing';
 import { SourceRow } from './components/SourceRow';
 import { Summary } from './components/Summary';
-import { CATS, MAX_CHARS, ORD, today, type CatId, type Passage as PassageData } from './data/categories';
+import { CATS, MAX_CHARS, ORD, type CatId, type Passage as PassageData } from './data/categories';
+import { dailyIndex, today } from './lib/daily';
 import { useMediaQuery } from './hooks/useMediaQuery';
 import { loadReps, repKey, saveReps, type Reps } from './lib/reps';
 import { ROCKS, rockGeom } from './lib/geometry';
@@ -49,7 +50,10 @@ interface Spark {
 export default function App() {
   const compact = useMediaQuery(MOBILE);
   const touch = useMediaQuery(TOUCH);
-  const day = useMemo(today, []);
+  // The day turns over at local midnight. A tab left open is caught up on the
+  // next focus or visibility change — but never under a run in progress.
+  const [day, setDay] = useState(today);
+  const [pendingDay, setPendingDay] = useState<number | null>(null);
 
   const [catId, setCatId] = useState<CatId>('kind');
   const [passageIndex, setPassageIndex] = useState<Partial<Record<CatId, number>>>({});
@@ -86,14 +90,39 @@ export default function App() {
 
   const passage: PassageData = cat.custom
     ? { text: customText, original: true, custom: true, tags: [] }
-    : cat.passages[(day + offset) % cat.passages.length];
+    : cat.passages[dailyIndex(cat.passages.length, day, offset)];
   const text = passage.text;
 
   // Runs are kept per passage, so leaving a category and coming back resumes it.
-  const runKey = cat.custom ? `custom:${customVersion}` : `${catId}:${offset}`;
+  const runKey = cat.custom ? `custom:${customVersion}` : `${catId}:${day}:${offset}`;
   const run = runs[runKey] ?? emptyRun;
 
   const build = buildRun(text, run, th, now);
+
+  useEffect(() => {
+    const check = () => {
+      const d = today();
+      if (d !== day) setPendingDay(d);
+    };
+    document.addEventListener('visibilitychange', check);
+    window.addEventListener('focus', check);
+    return () => {
+      document.removeEventListener('visibilitychange', check);
+      window.removeEventListener('focus', check);
+    };
+  }, [day]);
+
+  // Apply a new day once nothing has been typed on the current passage. A run
+  // mid-way (or its summary) stays put; "Try another" then lands on today's.
+  const runUntouched = run.typed.length === 0;
+  useEffect(() => {
+    if (pendingDay === null || !runUntouched) return;
+    prevDoneWords.current = 0;
+    prevLanded.current = -1;
+    setDay(pendingDay);
+    setPendingDay(null);
+    setPassageIndex({});
+  }, [pendingDay, runUntouched]);
   const reading = !cat.custom || !composing;
   const repeats = reps[repKey(text)] ?? 0;
 
@@ -130,7 +159,7 @@ export default function App() {
   const refocus = (id: CatId = catId, nextOffset = passageIndex[id] ?? 0) => {
     if (about) return;
     const target = CATS.find((c) => c.id === id)!;
-    const key = target.custom ? `custom:${customVersion}` : `${id}:${nextOffset}`;
+    const key = target.custom ? `custom:${customVersion}` : `${id}:${day}:${nextOffset}`;
     if ((target.custom && composing) || runs[key]?.end) return;
     inputRef.current?.focus({ preventScroll: true });
   };
@@ -251,6 +280,14 @@ export default function App() {
     interacted.current = true;
     prevDoneWords.current = 0;
     prevLanded.current = -1;
+    if (pendingDay !== null) {
+      // The day turned over during this run: "another" is today's own passage.
+      setDay(pendingDay);
+      setPendingDay(null);
+      setPassageIndex({});
+      refocus(catId, 0);
+      return;
+    }
     setPassageIndex((prev) => ({ ...prev, [catId]: (prev[catId] ?? 0) + 1 }));
     refocus(catId, offset + 1);
   };
@@ -394,14 +431,16 @@ export default function App() {
       }}
       style={{
         ...ROW_BTN,
-        // The phone footer keeps the button's full tap height.
-        padding: compact ? undefined : ROW_BTN.padding,
+        // The phone footer keeps the button's full tap height; the desktop
+        // footer gives it a touch more presence than the source-row buttons.
+        padding: compact ? undefined : '5px 12px',
+        fontSize: compact ? ROW_BTN.fontSize : 13,
         flex: 'none',
         color: th.deep,
         transition: 'background .2s',
       }}
     >
-      <RotateIcon size={compact ? 13 : 14} />
+      <RotateIcon size={compact ? 13 : 15} />
       Start over
     </button>
   );
@@ -623,12 +662,7 @@ export default function App() {
                     th={th}
                     isDaily={offset === 0}
                     compact={false}
-                    action={
-                      <>
-                        {sourceAction}
-                        {startOver}
-                      </>
-                    }
+                    action={sourceAction}
                   />
                 </>
               )}
@@ -663,8 +697,22 @@ export default function App() {
           </div>
         </div>
 
-        <div style={{ padding: '0 40px 26px', fontSize: 13, color: 'var(--color-neutral-700)', position: 'relative' }}>
-          Start typing. Backspace is allowed. There is no score to beat.
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+            // Reserve the button's ~28px row above the 26px bottom padding
+            // (border-box), so the passage holds still when it appears.
+            minHeight: 28 + 26,
+            padding: '0 40px 26px',
+            fontSize: 13,
+            color: 'var(--color-neutral-700)',
+            position: 'relative',
+          }}
+        >
+          <span>Start typing. Backspace is allowed. There is no score to beat.</span>
+          {startOver}
         </div>
       </div>
       {about && <AboutDialog th={th} onClose={() => setAbout(false)} />}

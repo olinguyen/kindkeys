@@ -106,8 +106,3 @@ export const ORD: Record<number, string> = {
 
 /** A custom passage is capped to the length of the longest curated one. */
 export const MAX_CHARS = 250;
-
-/** Whole days since the epoch — picks each category's passage of the day. */
-export function today(): number {
-  return Math.floor(Date.now() / 864e5);
-}

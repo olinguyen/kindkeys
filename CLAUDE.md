@@ -28,7 +28,7 @@ There is no unit-test runner and no linter. CI (`.github/workflows/ci.yml`, on p
 **Data layer, `src/data/`:**
 - `passages.json` is the prose and the file to edit for content. `passages.ts` casts it; the JSON has no literal types, so `scripts/check-passages.mjs` is what actually enforces the shape.
 - `types.ts` holds `CatId`, `Passage`, `Theme`, and the closed `TAGS` list. The `Tag` union is derived from `TAGS`, and the checker parses `TAGS`, `CatId`, and `MAX_CHARS` (in `categories.ts`) out of the source with regexes. Keep those declarations in their exact `export const TAGS = [...] as const;` / `export type CatId = ...;` / `export const MAX_CHARS = <n>;` forms or the checker exits 2.
-- `categories.ts` is the four categories' labels and palettes. `today()` (whole days since epoch) picks each category's starting passage, so the pool visibly rotates.
+- `categories.ts` is the four categories' labels and palettes. `lib/daily.ts` picks each category's passage of the day: `today()` is whole local days since the epoch, and `dailyIndex()` deals the pool in a per-cycle shuffled order so every passage shows once per cycle.
 
 **Pure logic, `src/lib/`:** `typing.ts` turns one `Run` into coloured word cells plus wpm/accuracy. `geometry.ts` holds deterministic shapes for the SVG illustrations. `fountain.ts` builds the "Your own" fountain imperatively (per-frame animation, not React renders). `reps.ts` persists repeat counts keyed by the passage's first 80 characters.
 

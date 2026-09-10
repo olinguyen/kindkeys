@@ -268,6 +268,33 @@ export default function App() {
 
   /* ── Actions ───────────────────────────────────────────────────── */
 
+  /**
+   * The wordmark is Home: the first category's passage of the day, every run
+   * and custom draft cleared, as though the app had just been opened. A day
+   * that turned over while the tab sat open is taken up here too.
+   */
+  const onHome = () => {
+    interacted.current = true;
+    prevDoneWords.current = 0;
+    prevLanded.current = -1;
+    setDay(today());
+    setPendingDay(null);
+    setCatId(CATS[0].id);
+    setPassageIndex({});
+    setRuns({});
+    setAbout(false);
+    setDraft('');
+    setCustomText('');
+    setComposing(true);
+    setSparks([]);
+    setDust([]);
+    setThuds(0);
+    setResetToken((t) => t + 1);
+    setNow(Date.now());
+    // The runs are gone, so the field is typable whatever was on screen.
+    inputRef.current?.focus({ preventScroll: true });
+  };
+
   const onPickCategory = (id: CatId) => {
     interacted.current = true;
     prevDoneWords.current = 0;
@@ -509,10 +536,20 @@ export default function App() {
               padding: 'calc(env(safe-area-inset-top, 0px) + 18px) 20px 0',
             }}
           >
-            <div className="kk-brand" style={{ fontSize: 20 }}>
+            <button
+              type="button"
+              className="kk-brand"
+              style={{ fontSize: 20 }}
+              title="Back to today's passage"
+              aria-label="Kindkeys, back to today's passage"
+              onClick={(e) => {
+                e.stopPropagation();
+                onHome();
+              }}
+            >
               <span>Kind</span>
               <span style={{ color: `color-mix(in oklch, ${th.accent} 80%, var(--color-text))` }}>Keys</span>
-            </div>
+            </button>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <button
                 type="button"
@@ -612,10 +649,20 @@ export default function App() {
         </div>
 
         <div className="nav" style={{ padding: '22px 40px', position: 'relative', gap: 22 }}>
-          <div className="kk-brand" style={{ fontSize: 22 }}>
+          <button
+            type="button"
+            className="kk-brand"
+            style={{ fontSize: 22 }}
+            title="Back to today's passage"
+            aria-label="Kindkeys, back to today's passage"
+            onClick={(e) => {
+              e.stopPropagation();
+              onHome();
+            }}
+          >
             <span>Kind</span>
             <span style={{ color: `color-mix(in oklch, ${th.accent} 80%, var(--color-text))` }}>Keys</span>
-          </div>
+          </button>
           <CategoryPills active={catId} th={th} onPick={onPickCategory} compact={false} />
           <button
             type="button"

@@ -134,9 +134,12 @@ To add a tag, add it to `TAGS` in `src/data/types.ts` — TypeScript derives the
 `Tag` union from that list and the checker reads it, so there is one place to
 edit.
 
-The day index picks each category's starting passage, so a small pool visibly
-repeats: with three passages, "Today's intention" comes round every third day.
-The checker warns below thirty.
+Each category shows one passage per day, turning over at local midnight
+(`src/lib/daily.ts`). The pool is dealt in a shuffled order that lasts one full
+cycle of pool-length days, then reshuffled, so every passage appears exactly
+once per cycle and consecutive cycles differ. "Try another" continues along the
+same sequence, so extra reads today never make tomorrow a repeat. Adding a
+passage reshuffles that pool. The checker warns below thirty.
 
 ## Layouts
 

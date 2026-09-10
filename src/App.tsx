@@ -431,14 +431,16 @@ export default function App() {
       }}
       style={{
         ...ROW_BTN,
-        // The phone footer keeps the button's full tap height.
-        padding: compact ? undefined : ROW_BTN.padding,
+        // The phone footer keeps the button's full tap height; the desktop
+        // footer gives it a touch more presence than the source-row buttons.
+        padding: compact ? undefined : '5px 12px',
+        fontSize: compact ? ROW_BTN.fontSize : 13,
         flex: 'none',
         color: th.deep,
         transition: 'background .2s',
       }}
     >
-      <RotateIcon size={compact ? 13 : 14} />
+      <RotateIcon size={compact ? 13 : 15} />
       Start over
     </button>
   );
@@ -660,12 +662,7 @@ export default function App() {
                     th={th}
                     isDaily={offset === 0}
                     compact={false}
-                    action={
-                      <>
-                        {sourceAction}
-                        {startOver}
-                      </>
-                    }
+                    action={sourceAction}
                   />
                 </>
               )}
@@ -700,8 +697,22 @@ export default function App() {
           </div>
         </div>
 
-        <div style={{ padding: '0 40px 26px', fontSize: 13, color: 'var(--color-neutral-700)', position: 'relative' }}>
-          Start typing. Backspace is allowed. There is no score to beat.
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+            // Reserve the button's ~28px row above the 26px bottom padding
+            // (border-box), so the passage holds still when it appears.
+            minHeight: 28 + 26,
+            padding: '0 40px 26px',
+            fontSize: 13,
+            color: 'var(--color-neutral-700)',
+            position: 'relative',
+          }}
+        >
+          <span>Start typing. Backspace is allowed. There is no score to beat.</span>
+          {startOver}
         </div>
       </div>
       {about && <AboutDialog th={th} onClose={() => setAbout(false)} />}

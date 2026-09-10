@@ -57,12 +57,21 @@ body {
 
 /* ── Header ────────────────────────────────────────────────────────── */
 
+/* A button, but it has to read as the wordmark: no chrome of its own, and it
+   inherits the colour the two spans then tint. */
 .kk-brand {
   font-family: var(--font-heading);
   font-weight: var(--font-heading-weight);
-  cursor: default;
+  cursor: pointer;
   display: inline-flex;
   margin-right: auto;
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--color-text);
+  line-height: inherit;
+  letter-spacing: inherit;
 }
 
 .kk-brand span {

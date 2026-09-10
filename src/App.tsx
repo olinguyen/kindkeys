@@ -596,8 +596,20 @@ export default function App() {
         {/* The right gutter holds the illustration; both it and the measure
             give a little below the stage's full width so the passage keeps a
             readable line. Sizes are in cqw, so they track the stage, not the
-            viewport. */}
-        <div style={{ flex: 1, display: 'grid', placeItems: 'center', padding: '40px clamp(300px, 31cqw, 340px) 0 clamp(60px, 9cqw, 100px)', position: 'relative', minHeight: 0 }}>
+            viewport. The summary slot is part of the centred block, which
+            would leave the visible band high on tall windows; extra top
+            padding sets the band, the art above it and the card below it
+            around the middle, and ramps away on short windows. */}
+        <div
+          style={{
+            flex: 1,
+            display: 'grid',
+            placeItems: 'center',
+            padding: `calc(40px + clamp(0px, (100vh - 760px) * 1.3, ${SUMMARY_SLOT + 18}px)) clamp(300px, 31cqw, 340px) 0 clamp(60px, 9cqw, 100px)`,
+            position: 'relative',
+            minHeight: 0,
+          }}
+        >
           <div style={{ width: '100%' }}>
             <div style={{ position: 'relative' }}>
               {illustrations}

@@ -26,14 +26,16 @@ body {
   transition: background 0.5s;
 }
 
-/* The desktop stage keeps the design's 1100px measure and clips the
-   illustrations' ground shadows at the bottom edge, as in the mockup. */
+/* The desktop stage keeps the design's 1100px measure and clips the sparks
+   that drift past its edges. It is a size container so the passage measure
+   and type can be sized in cqw against it rather than the viewport. */
 .kk-stage {
   position: relative;
   flex: 1;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -425,5 +427,20 @@ body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* Controls that leave the flow when unavailable, and ease in when they return. */
+[hidden] {
+  display: none !important;
+}
+
+.kk-fade-in {
+  animation: kk-fade-in 0.25s ease-out;
+}
+
+@keyframes kk-fade-in {
+  from {
+    opacity: 0;
   }
 }

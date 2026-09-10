@@ -34,7 +34,7 @@ export function CategoryPills({ active, th, onPick, compact }: Props) {
               // so its cream label keeps contrast on every theme.
               background: selected ? `color-mix(in oklch, ${c.th.accent} 70%, var(--color-text))` : 'transparent',
               color: selected ? 'var(--color-neutral-100)' : 'var(--color-text)',
-              ...(compact ? { fontSize: 12, padding: '8px 6px', flex: 1, minWidth: 0, justifyContent: 'center' } : {}),
+              ...(compact ? { fontSize: 12, padding: '9px 6px', flex: 1, minWidth: 0, justifyContent: 'center' } : {}),
             }}
           >
             {!compact && (

@@ -351,11 +351,11 @@ export default function App() {
       dust={dust}
       thuds={thuds}
       resetToken={resetToken}
-      // On desktop the illustration hangs off the right of the passage band
-      // (passage plus source row, or the compose box) with its ground line on
-      // the band's bottom edge, so it shares the passage's band at every
-      // viewport height instead of the page's edge. It scales down on short
-      // windows so the crown never reaches the nav.
+      // On desktop the illustration hangs off the right of the passage block
+      // (passage, source row and summary slot, or the compose box) with its
+      // ground line on the block's bottom edge, so the finished art stands
+      // beside the text and the card rather than towering over them. It
+      // scales down on short windows so the crown never reaches the nav.
       style={
         compact
           ? { position: 'relative', height: '100%', aspectRatio: '118 / 200' }
@@ -598,21 +598,21 @@ export default function App() {
             readable line. Sizes are in cqw, so they track the stage, not the
             viewport. The summary slot is part of the centred block, which
             would leave the visible band high on tall windows; extra top
-            padding sets the band, the art above it and the card below it
-            around the middle, and ramps away on short windows. */}
+            padding brings the band down toward the middle, and ramps away
+            on short windows. */}
         <div
           style={{
             flex: 1,
             display: 'grid',
             placeItems: 'center',
-            padding: `calc(40px + clamp(0px, (100vh - 760px) * 1.3, ${SUMMARY_SLOT + 18}px)) clamp(300px, 31cqw, 340px) 0 clamp(60px, 9cqw, 100px)`,
+            padding: `calc(40px + clamp(0px, (100vh - 760px) * 0.65, ${(SUMMARY_SLOT + 18) / 2}px)) clamp(300px, 31cqw, 340px) 0 clamp(60px, 9cqw, 100px)`,
             position: 'relative',
             minHeight: 0,
           }}
         >
-          <div style={{ width: '100%' }}>
-            <div style={{ position: 'relative' }}>
-              {illustrations}
+          <div style={{ position: 'relative', width: '100%' }}>
+            {illustrations}
+            <div>
               {!reading ? (
                 <Compose draft={draft} onDraft={onDraft} onSave={onSaveCustom} th={th} compact={false} />
               ) : (

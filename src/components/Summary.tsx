@@ -95,7 +95,7 @@ export function Summary({ cat, build, fix, reps, subline, onAgain, compact, keyH
           Once more
           {keyHint && (
             <kbd className="kk-kbd" aria-hidden>
-              ↵ Enter
+              ↵
             </kbd>
           )}
         </button>

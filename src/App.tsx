@@ -664,7 +664,7 @@ export default function App() {
         </div>
 
         <div style={{ padding: '0 40px 26px', fontSize: 13, color: 'var(--color-neutral-700)', position: 'relative' }}>
-          Backspace is allowed. There is no score to beat.
+          Start typing. Backspace is allowed. There is no score to beat.
         </div>
       </div>
       {about && <AboutDialog th={th} onClose={() => setAbout(false)} />}

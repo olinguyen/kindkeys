@@ -40,7 +40,7 @@ export function ProgressRing({ progress, th, size, label }: Props) {
             inset: 0,
             display: 'grid',
             placeItems: 'center',
-            fontSize: 13,
+            fontSize: Math.round(size / 4),
             fontWeight: 600,
             opacity: label ? 1 : 0,
             transition: 'opacity .3s',

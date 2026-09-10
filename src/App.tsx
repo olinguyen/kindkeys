@@ -20,6 +20,18 @@ const MOBILE = '(max-width: 860px)';
 /** A real on-screen keyboard, as opposed to a narrow desktop window. */
 const TOUCH = '(pointer: coarse)';
 
+/** Height kept under the source row on desktop for the summary card, so its arrival moves nothing. */
+const SUMMARY_SLOT = 156;
+
+/** The small ghost buttons that share the source row. */
+const ROW_BTN: React.CSSProperties = {
+  fontFamily: 'var(--font-body)',
+  fontWeight: 600,
+  fontSize: 12,
+  padding: '3px 8px',
+  whiteSpace: 'nowrap',
+};
+
 /** A passage longer than this drops a type size so the card still fits. */
 const LONG_PASSAGE = 225;
 
@@ -308,8 +320,8 @@ export default function App() {
         ? '18px'
         : '20px'
     : longPassage
-      ? '26px'
-      : '30px';
+      ? 'clamp(22px, 2.4cqw, 26px)'
+      : 'clamp(24px, 2.8cqw, 30px)';
 
   const canStartOver = run.typed.length > 0 && !build.doneAll && reading;
   const subline =
@@ -339,10 +351,15 @@ export default function App() {
       dust={dust}
       thuds={thuds}
       resetToken={resetToken}
+      // On desktop the illustration hangs off the right of the passage block
+      // (passage, source row and summary slot, or the compose box) with its
+      // ground line on the block's bottom edge, so the finished art stands
+      // beside the text and the card rather than towering over them. It
+      // scales down on short windows so the crown never reaches the nav.
       style={
         compact
           ? { position: 'relative', height: '100%', aspectRatio: '118 / 200' }
-          : { position: 'absolute', right: 60, bottom: 0, width: 260, height: 440 }
+          : { position: 'absolute', right: -280, bottom: 0, height: 'clamp(280px, 50vh - 10px, 440px)', aspectRatio: '260 / 440' }
       }
     />
   );
@@ -366,24 +383,22 @@ export default function App() {
   const startOver = (
     <button
       type="button"
-      className="btn btn-ghost"
+      // Leaves the flow entirely when unavailable so it never holds a blank
+      // wrapped line in the source row; kk-fade-in covers its arrival.
+      className="btn btn-ghost kk-fade-in"
+      hidden={!canStartOver}
       onMouseDown={keepFocus}
       onClick={(e) => {
         e.stopPropagation();
         onReset();
       }}
-      tabIndex={canStartOver ? 0 : -1}
-      aria-hidden={!canStartOver}
       style={{
-        fontFamily: 'var(--font-body)',
-        fontWeight: 600,
-        fontSize: compact ? 12 : undefined,
-        whiteSpace: 'nowrap',
+        ...ROW_BTN,
+        // The phone footer keeps the button's full tap height.
+        padding: compact ? undefined : ROW_BTN.padding,
         flex: 'none',
         color: th.deep,
-        opacity: canStartOver ? 1 : 0,
-        pointerEvents: canStartOver ? 'auto' : 'none',
-        transition: 'opacity .25s,background .2s',
+        transition: 'background .2s',
       }}
     >
       <RotateIcon size={compact ? 13 : 14} />
@@ -399,7 +414,7 @@ export default function App() {
         e.stopPropagation();
         onEditCustom();
       }}
-      style={{ fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: 12, padding: '3px 8px', color: th.deep, whiteSpace: 'nowrap' }}
+      style={{ ...ROW_BTN, color: th.deep }}
     >
       <PencilIcon />
       Edit passage
@@ -413,7 +428,7 @@ export default function App() {
         e.stopPropagation();
         onNext();
       }}
-      style={{ fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: 12, padding: '3px 8px', color: th.deep, whiteSpace: 'nowrap' }}
+      style={{ ...ROW_BTN, color: th.deep }}
     >
       <ShuffleIcon />
       Try another
@@ -482,7 +497,9 @@ export default function App() {
             {reading && (
               <div
                 style={{
-                  height: keyboardUp ? 104 : 200,
+                  // Sized so the summary card still lands above the fold on a
+                  // small phone; the art is drawn to read at this height.
+                  height: keyboardUp ? 104 : 150,
                   display: 'flex',
                   justifyContent: 'center',
                   pointerEvents: 'none',
@@ -493,7 +510,7 @@ export default function App() {
               </div>
             )}
 
-            <div style={{ position: 'relative', marginTop: 14 }}>
+            <div style={{ position: 'relative', marginTop: 10 }}>
               {!reading ? (
                 <Compose draft={draft} onDraft={onDraft} onSave={onSaveCustom} th={th} compact />
               ) : (
@@ -511,8 +528,8 @@ export default function App() {
                   marginTop: 10,
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 12,
-                  padding: '16px 18px',
+                  gap: 10,
+                  padding: '14px 16px',
                   borderRadius: 'var(--radius-lg)',
                   background: th.soft,
                   transition: 'opacity .45s,transform .45s cubic-bezier(.2,.8,.2,1),background .5s',
@@ -573,52 +590,81 @@ export default function App() {
             <InfoIcon />
             Why type this?
           </button>
-          <ProgressRing progress={build.hi} th={th} size={52} label={build.doneAll ? `${Math.round(parseFloat(build.sec))}s` : ''} />
+          <ProgressRing progress={build.hi} th={th} size={44} label={build.doneAll ? `${Math.round(parseFloat(build.sec))}s` : ''} />
         </div>
 
-        {illustrations}
-
-        <div style={{ flex: 1, display: 'grid', placeItems: 'center', padding: '40px 340px 0 100px', position: 'relative', minHeight: 0 }}>
+        {/* The right gutter holds the illustration; both it and the measure
+            give a little below the stage's full width so the passage keeps a
+            readable line. Sizes are in cqw, so they track the stage, not the
+            viewport. The summary slot is part of the centred block, which
+            would leave the visible band high on tall windows; extra top
+            padding brings the band down toward the middle, and ramps away
+            on short windows. */}
+        <div
+          style={{
+            flex: 1,
+            display: 'grid',
+            placeItems: 'center',
+            padding: `calc(40px + clamp(0px, (100vh - 760px) * 0.65, ${(SUMMARY_SLOT + 18) / 2}px)) clamp(300px, 31cqw, 340px) 0 clamp(60px, 9cqw, 100px)`,
+            position: 'relative',
+            minHeight: 0,
+          }}
+        >
           <div style={{ position: 'relative', width: '100%' }}>
-            {!reading ? (
-              <Compose draft={draft} onDraft={onDraft} onSave={onSaveCustom} th={th} compact={false} />
-            ) : (
-              <>
-                {passageBlock}
-                <SourceRow passage={passage} th={th} isDaily={offset === 0} compact={false} action={sourceAction} />
-                <div style={{ position: 'relative', marginTop: 18, minHeight: 140, pointerEvents: 'none' }}>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      top: 0,
-                      right: 0,
-                      zIndex: 1,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 14,
-                      padding: '18px 22px 16px',
-                      borderRadius: 'var(--radius-lg)',
-                      background: th.soft,
-                      opacity: build.doneAll ? 1 : 0,
-                      transform: `translateY(${build.doneAll ? 0 : 10}px)`,
-                      pointerEvents: build.doneAll ? 'auto' : 'none',
-                      visibility: build.doneAll ? 'visible' : 'hidden',
-                      transition: 'opacity .45s,transform .45s cubic-bezier(.2,.8,.2,1),background .5s,visibility .45s',
-                    }}
-                    aria-hidden={!build.doneAll}
-                  >
-                    {summary}
-                  </div>
+            {illustrations}
+            <div>
+              {!reading ? (
+                <Compose draft={draft} onDraft={onDraft} onSave={onSaveCustom} th={th} compact={false} />
+              ) : (
+                <>
+                  {passageBlock}
+                  <SourceRow
+                    passage={passage}
+                    th={th}
+                    isDaily={offset === 0}
+                    compact={false}
+                    action={
+                      <>
+                        {sourceAction}
+                        {startOver}
+                      </>
+                    }
+                  />
+                </>
+              )}
+            </div>
+            {reading && (
+              <div style={{ position: 'relative', marginTop: 18, minHeight: SUMMARY_SLOT, pointerEvents: 'none' }}>
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    right: 0,
+                    zIndex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 14,
+                    padding: '18px 22px 16px',
+                    borderRadius: 'var(--radius-lg)',
+                    background: th.soft,
+                    opacity: build.doneAll ? 1 : 0,
+                    transform: `translateY(${build.doneAll ? 0 : 10}px)`,
+                    pointerEvents: build.doneAll ? 'auto' : 'none',
+                    visibility: build.doneAll ? 'visible' : 'hidden',
+                    transition: 'opacity .45s,transform .45s cubic-bezier(.2,.8,.2,1),background .5s,visibility .45s',
+                  }}
+                  aria-hidden={!build.doneAll}
+                >
+                  {summary}
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '0 40px 26px', fontSize: 13, color: 'var(--color-neutral-700)', position: 'relative' }}>
-          <span>Backspace is allowed. There is no score to beat.</span>
-          {startOver}
+        <div style={{ padding: '0 40px 26px', fontSize: 13, color: 'var(--color-neutral-700)', position: 'relative' }}>
+          Backspace is allowed. There is no score to beat.
         </div>
       </div>
       {about && <AboutDialog th={th} onClose={() => setAbout(false)} />}

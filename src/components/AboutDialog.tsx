@@ -13,21 +13,21 @@ const POINTS = [
     ring: 'var(--color-accent-2-200)',
     ink: 'var(--color-accent-2-800)',
     title: 'Slow down.',
-    body: 'Typing gives words you might skim a little more attention.',
+    body: 'Typing takes a little longer than reading, giving you time to notice the words instead of skimming past them.',
   },
   {
     icon: <CompassIcon />,
     ring: 'var(--color-accent-200)',
     ink: 'var(--color-accent-800)',
-    title: 'Set an intention.',
-    body: 'Choose a passage that reflects something you want to practice or remember.',
+    title: 'Choose what matters.',
+    body: 'Pick a passage that reflects something you want to practice, remember, or keep in mind.',
   },
   {
     icon: <BookIcon />,
     ring: 'var(--color-neutral-200)',
     ink: 'var(--color-neutral-800)',
-    title: 'Consider the meaning.',
-    body: 'There’s no speed to aim for. Take time to decide what the words mean to you.',
+    title: 'Stay with the words.',
+    body: 'There’s no need to rush. Take your time, and let yourself actually think about what the words mean to you.',
   },
 ];
 
@@ -63,7 +63,7 @@ export function AboutDialog({ th, onClose }: Props) {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, fontSize: 15, lineHeight: 1.5 }}>
-          <p style={{ margin: 0 }}>Kindkeys uses typing as a short pause to consider how you want to approach your day.</p>
+          <p style={{ margin: 0 }}>KindKeys uses typing to give you a moment to slow down and really take in the words you’re writing.</p>
           {POINTS.map((p) => (
             <div key={p.title} style={{ display: 'flex', gap: 14 }}>
               <span

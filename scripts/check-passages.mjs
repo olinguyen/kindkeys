@@ -141,9 +141,15 @@ for (const [cat, list] of Object.entries(PASSAGES)) {
     if (open && openings.has(open)) warnings.push(`${at}: opens the same as ${openings.get(open)}`);
     else openings.set(open, at);
 
-    // Tags.
-    if (!Array.isArray(p.tags) || p.tags.length === 0) errors.push(`${at}: no tags`);
-    else {
+    // Tags. An original's tag completes "Original writing, inspired by ___" in
+    // the source row, so it needs at least one. An excerpt's row already reads
+    // "Author, Work" on its own, and a tag beside a real name claims that author
+    // belongs to the tradition — better absent than wrong, so excerpts may have
+    // none.
+    if (!Array.isArray(p.tags)) errors.push(`${at}: tags must be an array`);
+    else if (isOriginal && p.tags.length === 0) {
+      errors.push(`${at}: no tags — an original needs one to finish "Original writing, inspired by"`);
+    } else {
       for (const tag of p.tags) {
         if (!TAGS.includes(tag)) errors.push(`${at}: unknown tag "${tag}" — add it to TAGS in src/data/types.ts or fix the spelling`);
       }
